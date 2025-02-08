@@ -1,0 +1,22 @@
+services:
+  mysql:
+    image: mysql:8.0.41
+    container_name: mysql_db
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: 123456
+    networks:
+      - my-network
+    ports:
+      - '13306:3306'
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+
+
+networks:
+  my-network:
+    driver: bridge

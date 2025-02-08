@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.csu.codemanagesystem.infrastructure.dao.IUserDao">
+    <resultMap id="data" type="edu.csu.codemanagesystem.infrastructure.po.User">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="password" property="password"/>
+        <result column="type" property="type"/>
+    </resultMap>
+    <select id="queryUser" resultType="edu.csu.codemanagesystem.infrastructure.po.User"
+            parameterType="edu.csu.codemanagesystem.infrastructure.po.User">
+        select id, user_id, password, type
+        from users
+        where user_id = #{userId}
+          and password = #{password}
+    </select>
+</mapper>
