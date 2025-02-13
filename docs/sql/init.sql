@@ -90,17 +90,18 @@ create table `student` (
     `student_id` int(10) not null unique comment '学号',
     `name` varchar(16) not null comment '学生名称',
     `sex` varchar(4) not null comment '性别',
+    `homeroom_class` varchar(16) not null comment '行政班级',
     `phone_number` varchar(16) not null comment '电话号码',
     `mail` varchar(32) not null comment '邮箱地址',
     primary key (`id`)
 ) default charset = utf8mb4 comment '学生表';
 
 lock tables `student` write ;
-insert into `student` (id, student_id, name, sex, phone_number, mail)
+insert into `student` (id, student_id, name, sex, homeroom_class, phone_number, mail)
 values
-    (1, 300001, '刘七', '男', 111, 'test@csu.edu.cn'),
-    (2, 300002, '孙八', '男', 111, 'test@csu.edu.cn'),
-    (3, 300003, '赵六', '男', 111, 'test@csu.edu.cn');
+    (1, 300001, '刘七', '男', '计科2206', 111, 'test@csu.edu.cn'),
+    (2, 300002, '孙八', '男', '计科2206',111, 'test@csu.edu.cn'),
+    (3, 300003, '赵六', '男', '计科2206',111, 'test@csu.edu.cn');
 unlock tables ;
 
 drop table if exists `student_course`;
@@ -160,3 +161,13 @@ insert into `users` (id, user_id, password, type)
 values
     (1, 100001, '123456', 'admin');
 unlock tables ;
+
+drop table if exists `student_class`;
+create table `student_class` (
+    `id` int(10) auto_increment not null comment '自增id',
+    `student_id` int(10) not null comment '学生id',
+    `class_id` int(10) not null comment '班级id',
+    primary key (`id`),
+    foreign key (`student_id`) references student(`student_id`),
+    foreign key (`class_id`) references class(`class_id`)
+) default charset = utf8mb4 comment '学生选课班级表';
