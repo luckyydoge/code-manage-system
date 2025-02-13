@@ -21,6 +21,7 @@ public class LoginController {
             return Response.<String>builder()
                     .code("000")
                     .info("")
+                    .data(user.getType())
                     .build();
         }
         return Response.<String>builder()

@@ -19,6 +19,10 @@ public class LoginRepository implements ILoginRepository {
         userReq.setUserId(userEntity.getUserId());
         userReq.setPassword(userEntity.getPassword());
         User userRes = userDao.queryUser(userReq);
-        return null != userRes;
+        if (null == userRes) {
+            return false;
+        }
+        userEntity.setType(userRes.getType());
+        return true;
     }
 }

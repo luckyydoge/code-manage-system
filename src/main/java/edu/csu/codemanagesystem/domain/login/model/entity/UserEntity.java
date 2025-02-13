@@ -10,4 +10,5 @@ import lombok.*;
 public class UserEntity {
     private Long userId;
     private String password;
+    private String type;
 }
