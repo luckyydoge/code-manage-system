@@ -7,6 +7,11 @@
         <result column="password" property="password"/>
         <result column="type" property="type"/>
     </resultMap>
+    <update id="updateUserByUserId" parameterType="edu.csu.codemanagesystem.infrastructure.po.User">
+        update users
+        set password = #{password}
+        where user_id = #{userId}
+    </update>
     <select id="queryUser" resultType="edu.csu.codemanagesystem.infrastructure.po.User"
             parameterType="edu.csu.codemanagesystem.infrastructure.po.User">
         select id, user_id, password, type

@@ -1,5 +1,6 @@
 package edu.csu.codemanagesystem.infrastructure.repository;
 
+import edu.csu.codemanagesystem.domain.login.model.entity.ChangePasswordEntity;
 import edu.csu.codemanagesystem.domain.login.model.entity.UserEntity;
 import edu.csu.codemanagesystem.domain.login.repository.ILoginRepository;
 import edu.csu.codemanagesystem.infrastructure.dao.IUserDao;
@@ -14,15 +15,26 @@ public class LoginRepository implements ILoginRepository {
     IUserDao userDao;
 
     @Override
-    public Boolean loginCheck(UserEntity userEntity) {
+    public UserEntity queryUser(UserEntity userEntity) {
         User userReq = new User();
         userReq.setUserId(userEntity.getUserId());
         userReq.setPassword(userEntity.getPassword());
         User userRes = userDao.queryUser(userReq);
         if (null == userRes) {
-            return false;
+            return null;
         }
-        userEntity.setType(userRes.getType());
-        return true;
+        return UserEntity.builder()
+                .userId(userRes.getUserId())
+                .password(userRes.getPassword())
+                .type(userRes.getType())
+                .build();
+    }
+
+    @Override
+    public void changePassword(ChangePasswordEntity changePasswordEntity) {
+        User userReq = new User();
+        userReq.setUserId(changePasswordEntity.getUserId());
+        userReq.setPassword(changePasswordEntity.getNewPassword());
+        userDao.updateUserByUserId(userReq);
     }
 }

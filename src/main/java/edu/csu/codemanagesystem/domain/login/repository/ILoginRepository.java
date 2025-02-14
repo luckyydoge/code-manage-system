@@ -1,8 +1,12 @@
 package edu.csu.codemanagesystem.domain.login.repository;
 
+import edu.csu.codemanagesystem.domain.login.model.entity.ChangePasswordEntity;
 import edu.csu.codemanagesystem.domain.login.model.entity.UserEntity;
 
 public interface ILoginRepository {
 
-    Boolean loginCheck(UserEntity user);
+    UserEntity  queryUser(UserEntity user);
+
+    void changePassword(ChangePasswordEntity changePasswordEntity);
 }
+
