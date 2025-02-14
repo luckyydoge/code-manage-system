@@ -21,13 +21,14 @@ public class BackupService implements IBackup {
 
     private String backupFilePath = "./docs/sql/backup.sql";
 
-    private String cmd = "mysqldump";
+    private String cmd = "docker.exe";
 
     @Override
     public void backup() {
 
         try {
-            ProcessBuilder pb = new ProcessBuilder(cmd, "-u", username, "-P", port, "-p" + password, "code_manage_system");
+            ProcessBuilder pb = new ProcessBuilder(cmd,
+                    "exec", "mysql_db", "mysqldump", "-u", username, "-P", port, "-p" + password, "code_manage_system");
             pb.redirectOutput(new File(backupFilePath));
             List<String> commands = pb.command();
             commands.forEach(command -> {

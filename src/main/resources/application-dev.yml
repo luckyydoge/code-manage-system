@@ -8,7 +8,7 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://127.0.0.1:13306/code_manage_system
+    url: jdbc:mysql://127.0.0.1:23306/code_manage_system
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    initialize: true
   docker:
