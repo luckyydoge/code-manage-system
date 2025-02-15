@@ -213,8 +213,8 @@ CREATE TABLE `student` (
   `name` varchar(16) NOT NULL COMMENT '学生名称',
   `sex` varchar(4) NOT NULL COMMENT '性别',
   `phone_number` varchar(16) NOT NULL COMMENT '电话号码',
-  `mail` varchar(32) NOT NULL COMMENT '邮箱地址',
-  `homerome_class` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '行政班级',
+  `email` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '邮箱地址',
+  `administrative_class` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '行政班级',
   PRIMARY KEY (`id`),
   UNIQUE KEY `student_id` (`student_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='学生表';
@@ -327,6 +327,7 @@ CREATE TABLE `teacher` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `teacher_id` int NOT NULL COMMENT '教师id',
   `name` varchar(32) NOT NULL COMMENT '教师名称',
+  `email` varchar(32) NOT NULL COMMENT '电子邮箱地址',
   PRIMARY KEY (`id`),
   UNIQUE KEY `teacher_id` (`teacher_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='教师表';
@@ -338,7 +339,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1,200001,'abc'),(2,200002,'abd'),(3,200003,'abf');
+INSERT INTO `teacher` VALUES (1,200001,'abc',''),(2,200002,'abd',''),(3,200003,'abf','');
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -355,7 +356,7 @@ CREATE TABLE `users` (
   `password` varchar(16) NOT NULL COMMENT '密码',
   `type` varchar(8) NOT NULL COMMENT '类型 student | admin | teacher',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户登录表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户登录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -364,7 +365,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,100001,'123456','admin');
+INSERT INTO `users` VALUES (1,100001,'123456','admin'),(2,100002,'222','student');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -377,4 +378,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-14 18:04:59
+-- Dump completed on 2025-02-15 13:40:53
