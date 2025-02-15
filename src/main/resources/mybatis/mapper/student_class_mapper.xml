@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.csu.codemanagesystem.infrastructure.dao.IStudentClassDao">
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert ignore into student_class (student_id, class_id) values
+            <foreach collection="list" item="item" separator=",">
+                (#{item.studentId}, #{item.classId})
+            </foreach>
+    </insert>
+</mapper>

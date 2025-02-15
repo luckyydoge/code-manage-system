@@ -42,4 +42,11 @@ public class ImportRepositoryTest {
         userList.add(user2);
         userDao.insertUserBatch(userList);
     }
+
+    @Test
+    public void testQueryStudentCount() {
+        int count = importRepository.queryStudentCount();
+        log.info("student count {}", count);
+    }
+
 }

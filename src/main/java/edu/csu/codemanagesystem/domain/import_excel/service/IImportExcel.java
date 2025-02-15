@@ -4,6 +4,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 
-public interface IImportExcel {
+public interface IImportExcel<T> {
     Boolean ImportExcel(InputStream inputStream);
 }

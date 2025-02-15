@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.csu.codemanagesystem.infrastructure.dao.IStudentDao">
+    <insert id="insertStudentBatch" parameterType="java.util.List">
+        insert into student (student_id, name, sex, phone_number, email, administrative_class) values
+            <foreach collection="list" item="student" separator=",">
+                (#{student.studentId}, #{student.name}, #{student.sex}, #{student.phoneNumber}, #{student.email}, #{student.administrativeClass})
+            </foreach>
+        on duplicate key update
+            student_id = values (student_id),
+        name = values (name),
+        sex = values (sex),
+        phone_number = values (phone_number),
+        email = values (email),
+        administrative_class = values (administrative_class);
+    </insert>
+    <select id="queryStudentCount" resultType="java.lang.Integer">
+        select count(*)
+        from student;
+    </select>
+</mapper>

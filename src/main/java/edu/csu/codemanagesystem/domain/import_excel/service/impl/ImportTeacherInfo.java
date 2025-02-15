@@ -6,7 +6,9 @@ import cn.idev.excel.read.listener.ReadListener;
 import cn.idev.excel.util.ListUtils;
 import edu.csu.codemanagesystem.domain.import_excel.model.TeacherEntity;
 import edu.csu.codemanagesystem.domain.import_excel.repository.IImportRepository;
+import edu.csu.codemanagesystem.domain.import_excel.service.AbstractImport;
 import edu.csu.codemanagesystem.domain.import_excel.service.IImportExcel;
+import edu.csu.codemanagesystem.infrastructure.repository.ImportRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -20,44 +22,30 @@ import java.util.List;
 @Slf4j
 //@Service
 @Component("teacher_import_service")
-public class ImportTeacherInfo implements IImportExcel {
+public class ImportTeacherInfo extends AbstractImport<TeacherEntity> {
 
-    private final IImportRepository importRepository;
+    public ImportTeacherInfo(ImportRepository importRepository) {
+        super(importRepository);
+    }
 
-    public ImportTeacherInfo(IImportRepository importRepository) {
-        this.importRepository = importRepository;
+    private long baseCount = 200000;
+
+    @Override
+    protected int getCount() {
+        return importRepository.queryTeacherCount();
     }
 
     @Override
-    public Boolean ImportExcel(InputStream inputStream) {
-        int batchCount = 50;
-        List<TeacherEntity> cacheList = new ArrayList<>(55);
-        log.info("input stream {}", inputStream.toString());
-        FastExcel.read(inputStream, TeacherEntity.class, new ReadListener<TeacherEntity>() {
-            int teacherCount = importRepository.queryTeacherCount();
-
-            @Override
-            public void invoke(TeacherEntity teacherEntity, AnalysisContext analysisContext) {
-                log.info("get teacher {}", teacherEntity.toString());
-                teacherEntity.setTeacherId((long) (200000 + teacherCount));
-                teacherCount += 1;
-                cacheList.add(teacherEntity);
-                if (cacheList.size() >= batchCount) {
-                    saveData(cacheList);
-                }
-
-            }
-
-            @Override
-            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
-                saveData(cacheList);
-            }
-        }).sheet().doRead();
-
-        return true;
+    protected void setId(TeacherEntity entity, int count) {
+        entity.setTeacherId(count + baseCount);
     }
 
-    private void saveData(List<TeacherEntity> cacheList) {
+    @Override
+    protected Class<TeacherEntity> getClazz() {
+        return TeacherEntity.class;
+    }
+
+    protected void saveData(List<TeacherEntity> cacheList) {
         importRepository.insertTeacherBatch(cacheList);
         importRepository.insertTeacherBatchIntoUsers(cacheList);
         cacheList.clear();

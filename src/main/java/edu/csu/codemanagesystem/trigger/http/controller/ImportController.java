@@ -2,6 +2,7 @@ package edu.csu.codemanagesystem.trigger.http.controller;
 
 import edu.csu.codemanagesystem.domain.import_excel.service.IImportExcel;
 import edu.csu.codemanagesystem.domain.import_excel.service.ImportServiceFactory;
+import edu.csu.codemanagesystem.domain.import_excel.service.impl.ImportStudentInfo;
 import edu.csu.codemanagesystem.type.Response;
 import edu.csu.codemanagesystem.type.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,33 @@ public class ImportController {
         Boolean success = null;
         try {
             success = teacherImportService.ImportExcel(file.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return Response.<String>builder()
+                    .code(ResponseCode.FAILURE.getCode())
+                    .info(ResponseCode.FAILURE.getInfo())
+                    .build();
+        }
+        if (success) {
+            return Response.<String>builder()
+                    .info(ResponseCode.SUCCESS.getInfo())
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .build();
+        }
+        return Response.<String>builder()
+                .code(ResponseCode.FAILURE.getCode())
+                .info(ResponseCode.FAILURE.getInfo())
+                .build();
+    }
+
+    @PostMapping("/teacher/importStudentInfo")
+    public Response<String> importStudentInfo(@RequestParam MultipartFile file, @RequestParam Long classId) {
+        IImportExcel studentImportService = importServiceFactory.getImportExcel(ImportServiceFactory.ImportServiceType.STUDENT);
+        ImportStudentInfo t = (ImportStudentInfo) studentImportService;
+        t.setClassId(classId);
+        Boolean success = null;
+        try {
+            success = studentImportService.ImportExcel(file.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
             return Response.<String>builder()
