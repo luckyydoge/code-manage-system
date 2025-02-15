@@ -113,6 +113,11 @@
 <!--            <artifactId>spring-security-test</artifactId>-->
 <!--            <scope>test</scope>-->
 <!--        </dependency>-->
+        <dependency>
+            <groupId>cn.idev.excel</groupId>
+            <artifactId>fastexcel</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

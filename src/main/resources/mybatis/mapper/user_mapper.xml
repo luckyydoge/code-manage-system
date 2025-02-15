@@ -7,6 +7,14 @@
         <result column="password" property="password"/>
         <result column="type" property="type"/>
     </resultMap>
+    <insert id="insertUserBatch" parameterType="java.util.List">
+        insert into users (user_id, password, type)values
+            <foreach collection="list" item="user" separator=",">
+                (#{user.userId}, #{user.password}, #{user.type})
+            </foreach>
+        on duplicate key update
+            password = values(password);
+    </insert>
     <update id="updateUserByUserId" parameterType="edu.csu.codemanagesystem.infrastructure.po.User">
         update users
         set password = #{password}

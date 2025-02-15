@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.csu.codemanagesystem.infrastructure.dao.ITeacherDao">
+    <insert id="insertTeacherBatch" parameterType="java.util.List">
+        insert into teacher(teacher_id, name, email)
+        values
+            <foreach collection="list" item="teacher" separator=",">
+                (#{teacher.teacherId}, #{teacher.name}, #{teacher.email})
+            </foreach>
+        on duplicate key update
+            name = values(name),
+            email = values(email);
+    </insert>
+    <select id="queryTeacherCount" resultType="java.lang.Integer">
+        select count(*) from teacher;
+    </select>
+</mapper>

@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 public enum ResponseCode {
     SUCCESS("000", "操作成功"),
-    OLD_PASSWORD_INCORRECT("001", "旧密码错误")
+    FAILURE("001", "操作失败,请联系工作人员"),
+    OLD_PASSWORD_INCORRECT("002", "旧密码错误")
     ;
     private String code;
     private String info;
