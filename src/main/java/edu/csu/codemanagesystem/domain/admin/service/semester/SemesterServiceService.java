@@ -42,4 +42,10 @@ public class SemesterServiceService implements ISemesterService {
         Boolean success = semesterRepository.setCurrentSemester(semesterId);
         return success;
     }
+
+    @Override
+    public SemesterEntity queryCurrentSemester() {
+        SemesterEntity semesterEntity = semesterRepository.queryCurrentSemester();
+        return null;
+    }
 }

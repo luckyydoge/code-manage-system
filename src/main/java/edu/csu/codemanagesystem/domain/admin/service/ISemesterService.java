@@ -10,4 +10,6 @@ public interface ISemesterService {
     Boolean createSemester(SemesterEntity semester);
 
     Boolean setCurrentSemester(Long semesterId);
+
+    SemesterEntity queryCurrentSemester();
 }

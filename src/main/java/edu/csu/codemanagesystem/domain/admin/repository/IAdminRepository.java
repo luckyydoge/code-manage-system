@@ -18,4 +18,6 @@ public interface IAdminRepository {
     void createCourse(CourseEntity course);
 
     Boolean createTeacher(TeacherEntity teacherEntity);
+
+    SemesterEntity queryCurrentSemester();
 }

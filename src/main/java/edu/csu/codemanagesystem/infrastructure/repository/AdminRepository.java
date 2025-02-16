@@ -4,20 +4,19 @@ import edu.csu.codemanagesystem.domain.admin.model.entity.CourseEntity;
 import edu.csu.codemanagesystem.domain.admin.model.entity.SemesterEntity;
 import edu.csu.codemanagesystem.domain.admin.repository.IAdminRepository;
 import edu.csu.codemanagesystem.domain.import_excel.model.TeacherEntity;
-import edu.csu.codemanagesystem.infrastructure.dao.ICourseDao;
-import edu.csu.codemanagesystem.infrastructure.dao.ISemesterDao;
-import edu.csu.codemanagesystem.infrastructure.dao.ITeacherDao;
-import edu.csu.codemanagesystem.infrastructure.dao.IUserDao;
+import edu.csu.codemanagesystem.infrastructure.dao.*;
 import edu.csu.codemanagesystem.infrastructure.po.Course;
 import edu.csu.codemanagesystem.infrastructure.po.Semester;
 import edu.csu.codemanagesystem.infrastructure.po.Teacher;
 import edu.csu.codemanagesystem.infrastructure.po.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Repository
 public class AdminRepository implements IAdminRepository {
 
@@ -32,6 +31,9 @@ public class AdminRepository implements IAdminRepository {
 
     @Autowired
     ITeacherDao teacherDao;
+
+    @Autowired
+    ICurrentSemesterDao currentSemesterDao;
 
     private long teacherBaseCount = 200000L;
 
@@ -85,6 +87,20 @@ public class AdminRepository implements IAdminRepository {
         userList.add(user);
         userDao.insertUserBatch(userList);
         return true;
+    }
+
+    @Override
+    public SemesterEntity queryCurrentSemester() {
+        Long semesterId = currentSemesterDao.queryCurrentSemesterId();
+        log.info("semester id : {}", semesterId);
+        Semester semester = semesterDao.querySemesterBySemesterId(semesterId);
+        SemesterEntity semesterEntity = SemesterEntity.builder()
+                .semesterId(semesterId)
+                .name(semester.getName())
+                .startTime(semester.getStartTime())
+                .endTime(semester.getEndTime())
+                .build();
+        return semesterEntity;
     }
 
     @Override
