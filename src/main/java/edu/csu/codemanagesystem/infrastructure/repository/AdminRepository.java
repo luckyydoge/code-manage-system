@@ -107,7 +107,8 @@ public class AdminRepository implements IAdminRepository {
     @Override
     public void createSemester(SemesterEntity semesterEntity) {
         Semester semester = new Semester();
-        semester.setSemesterId(semesterEntity.getSemesterId());
+        long count = semesterDao.querySemesterCount();
+        semester.setSemesterId(count + 1);
         semester.setName(semesterEntity.getName());
         semester.setEndTime(semesterEntity.getEndTime());
         semester.setStartTime(semesterEntity.getStartTime());
