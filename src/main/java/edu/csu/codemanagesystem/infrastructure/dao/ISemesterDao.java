@@ -12,4 +12,6 @@ public interface ISemesterDao {
     void createSemester(Semester semester);
 
     void setCurrentSemester(Long semesterId);
+
+    int querySemesterCount();
 }

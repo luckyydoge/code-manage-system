@@ -15,4 +15,7 @@
     <select id="queryAllSemester" resultType="edu.csu.codemanagesystem.infrastructure.po.Semester">
         select id, semester_id, name, start_time, end_time, status from semester;
     </select>
+    <select id="querySemesterCount" resultType="java.lang.Integer">
+        select count(*) from semester;
+    </select>
 </mapper>
