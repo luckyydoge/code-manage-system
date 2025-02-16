@@ -1,6 +1,6 @@
 package edu.csu.codemanagesystem.domain;
 
-import edu.csu.codemanagesystem.domain.admin.service.ITeacherService;
+import edu.csu.codemanagesystem.domain.admin.service.ITeacherManageService;
 import edu.csu.codemanagesystem.domain.import_excel.model.TeacherEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TeacherServiceTest {
 
     @Autowired
-    ITeacherService teacherService;
+    ITeacherManageService teacherService;
 
     @Test
     public void testCreateTeacher(){

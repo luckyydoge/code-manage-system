@@ -4,7 +4,7 @@ import edu.csu.codemanagesystem.domain.admin.service.IBackupService;
 import edu.csu.codemanagesystem.domain.admin.model.entity.CourseEntity;
 import edu.csu.codemanagesystem.domain.admin.service.ICourseService;
 import edu.csu.codemanagesystem.domain.admin.service.ISemesterService;
-import edu.csu.codemanagesystem.domain.admin.service.ITeacherService;
+import edu.csu.codemanagesystem.domain.admin.service.ITeacherManageService;
 import edu.csu.codemanagesystem.domain.import_excel.model.TeacherEntity;
 import edu.csu.codemanagesystem.domain.import_excel.service.IImportExcel;
 import edu.csu.codemanagesystem.domain.import_excel.service.ImportServiceFactory;
@@ -43,7 +43,7 @@ public class AdminController {
     ISemesterService semesterService;
 
     @Autowired
-    ITeacherService teacherService;
+    ITeacherManageService teacherService;
 
     @GetMapping("/admin/queryAllSemester")
     public Response<List<SemesterEntity>> queryAllSemester() {
