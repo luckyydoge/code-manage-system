@@ -46,6 +46,6 @@ public class SemesterServiceService implements ISemesterService {
     @Override
     public SemesterEntity queryCurrentSemester() {
         SemesterEntity semesterEntity = semesterRepository.queryCurrentSemester();
-        return null;
+        return semesterEntity;
     }
 }
