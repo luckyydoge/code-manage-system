@@ -1,12 +1,14 @@
 package edu.csu.codemanagesystem.trigger.http.controller;
 
-import edu.csu.codemanagesystem.domain.admin.service.IBackup;
+import edu.csu.codemanagesystem.domain.admin.service.IBackupService;
 import edu.csu.codemanagesystem.domain.admin.model.entity.CourseEntity;
-import edu.csu.codemanagesystem.domain.admin.service.course.CourseService;
+import edu.csu.codemanagesystem.domain.admin.service.ICourseService;
+import edu.csu.codemanagesystem.domain.admin.service.ISemesterService;
+import edu.csu.codemanagesystem.domain.admin.service.ITeacherService;
+import edu.csu.codemanagesystem.domain.import_excel.model.TeacherEntity;
 import edu.csu.codemanagesystem.domain.import_excel.service.IImportExcel;
 import edu.csu.codemanagesystem.domain.import_excel.service.ImportServiceFactory;
 import edu.csu.codemanagesystem.domain.admin.model.entity.SemesterEntity;
-import edu.csu.codemanagesystem.domain.admin.service.semester.SemesterService;
 import edu.csu.codemanagesystem.type.Response;
 import edu.csu.codemanagesystem.type.ResponseCode;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,16 +31,19 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    IBackup backupService;
+    IBackupService backupService;
 
     @Autowired
-    CourseService courseService;
+    ICourseService courseService;
 
     @Autowired
     private ImportServiceFactory importServiceFactory;
 
     @Autowired
-    SemesterService semesterService;
+    ISemesterService semesterService;
+
+    @Autowired
+    ITeacherService teacherService;
 
     @GetMapping("/admin/queryAllSemester")
     public Response<List<SemesterEntity>> queryAllSemester() {
@@ -63,44 +68,30 @@ public class AdminController {
     @GetMapping("/admin/setCurrentSemester")
     public Response<Boolean> setCurrentSemester(@RequestParam Long semesterId) {
         Boolean success = semesterService.setCurrentSemester(semesterId);
-        if (success) {
-            return Response.<Boolean>builder()
-                    .code(ResponseCode.SUCCESS.getCode())
-                    .info(ResponseCode.SUCCESS.getInfo())
-                    .data(true)
-                    .build();
-        }
-        return Response.<Boolean>builder()
-                .code(ResponseCode.FAILURE.getCode())
-                .info(ResponseCode.FAILURE.getInfo())
-                .data(false)
-                .build();
+        return returnResponseByBoolean(success);
+    }
+
+    @PostMapping("/admin/createTeacher")
+    public Response<Boolean> createTeacher(@RequestBody TeacherEntity teacher) {
+        Boolean success = teacherService.addTeacher(teacher);
+        return returnResponseByBoolean(success);
 
     }
 
     @PostMapping("/admin/importTeacherInfo")
-    public Response<String> importTeacherInfo(@RequestParam MultipartFile file) {
+    public Response<Boolean> importTeacherInfo(@RequestParam MultipartFile file) {
         IImportExcel teacherImportService = importServiceFactory.getImportExcel(ImportServiceFactory.ImportServiceType.TEACHER);
-        Boolean success = null;
+        Boolean success;
         try {
             success = teacherImportService.ImportExcel(file.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
-            return Response.<String>builder()
+            return Response.<Boolean>builder()
                     .code(ResponseCode.FAILURE.getCode())
                     .info(ResponseCode.FAILURE.getInfo())
                     .build();
         }
-        if (success) {
-            return Response.<String>builder()
-                    .info(ResponseCode.SUCCESS.getInfo())
-                    .code(ResponseCode.SUCCESS.getCode())
-                    .build();
-        }
-        return Response.<String>builder()
-                .code(ResponseCode.FAILURE.getCode())
-                .info(ResponseCode.FAILURE.getInfo())
-                .build();
+        return returnResponseByBoolean(success);
     }
 
 
@@ -146,5 +137,20 @@ public class AdminController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private Response<Boolean> returnResponseByBoolean(Boolean success) {
+        if (success) {
+            return Response.<Boolean>builder()
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .info(ResponseCode.SUCCESS.getInfo())
+                    .data(true)
+                    .build();
+        }
+        return Response.<Boolean>builder()
+                .code(ResponseCode.FAILURE.getCode())
+                .info(ResponseCode.FAILURE.getInfo())
+                .data(false)
+                .build();
     }
 }

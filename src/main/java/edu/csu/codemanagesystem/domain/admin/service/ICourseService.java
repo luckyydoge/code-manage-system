@@ -4,7 +4,7 @@ import edu.csu.codemanagesystem.domain.admin.model.entity.CourseEntity;
 
 import java.util.List;
 
-public interface ICourse {
+public interface ICourseService {
     List<CourseEntity> queryCourse(CourseEntity courseReqFactor);
 
     Boolean createCourse(CourseEntity course);

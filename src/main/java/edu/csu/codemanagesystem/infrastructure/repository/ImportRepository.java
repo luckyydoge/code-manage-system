@@ -58,7 +58,6 @@ public class ImportRepository implements IImportRepository {
             User user = new User();
             user.setUserId(teacherEntity.getTeacherId());
             user.setType("teacher");
-            user.setPassword("123456");
             userList.add(user);
         });
 
@@ -95,7 +94,6 @@ public class ImportRepository implements IImportRepository {
             User user = new User();
             user.setUserId(studentEntity.getStudentId());
             user.setType("teacher");
-            user.setPassword("123456");
             userList.add(user);
         });
 

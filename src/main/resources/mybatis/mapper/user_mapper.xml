@@ -8,9 +8,9 @@
         <result column="type" property="type"/>
     </resultMap>
     <insert id="insertUserBatch" parameterType="java.util.List">
-        insert into users (user_id, password, type)values
+        insert into users (user_id, type)values
             <foreach collection="list" item="user" separator=",">
-                (#{user.userId}, #{user.password}, #{user.type})
+                (#{user.userId}, #{user.type})
             </foreach>
         on duplicate key update
             password = values(password);

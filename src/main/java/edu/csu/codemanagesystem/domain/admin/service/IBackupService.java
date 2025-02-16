@@ -1,5 +1,5 @@
 package edu.csu.codemanagesystem.domain.admin.service;
 
-public interface IBackup {
+public interface IBackupService {
     public void backup();
 }

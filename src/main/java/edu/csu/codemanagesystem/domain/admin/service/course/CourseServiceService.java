@@ -2,7 +2,7 @@ package edu.csu.codemanagesystem.domain.admin.service.course;
 
 import edu.csu.codemanagesystem.domain.admin.model.entity.CourseEntity;
 import edu.csu.codemanagesystem.domain.admin.repository.IAdminRepository;
-import edu.csu.codemanagesystem.domain.admin.service.ICourse;
+import edu.csu.codemanagesystem.domain.admin.service.ICourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +10,11 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class CourseService implements ICourse {
+public class CourseServiceService implements ICourseService {
 
     final private IAdminRepository repository;
 
-    public CourseService(IAdminRepository repository) {
+    public CourseServiceService(IAdminRepository repository) {
         this.repository = repository;
     }
 
