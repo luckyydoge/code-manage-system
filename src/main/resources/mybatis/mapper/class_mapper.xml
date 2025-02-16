@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.csu.codemanagesystem.infrastructure.dao.IClassDao">
+    <insert id="createClass">
+        insert into class (class_id, name, people_count, semester_id, course_id, teacher_id)
+            values
+                (#{classId}, #{name}, #{peopleCount}, #{semesterId}, #{courseId}, #{teacherId});
+    </insert>
+    <select id="queryClassCount" resultType="java.lang.Integer">
+        select count(*) from class;
+    </select>
+</mapper>
