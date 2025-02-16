@@ -5,6 +5,13 @@
         insert into semester (semester_id, name, start_time, end_time)
         values (#{semesterId}, #{name}, #{startTime}, #{endTime});
     </insert>
+    <insert id="setCurrentSemester">
+        insert into current_semester(id, semester_id)
+        values
+            (1, #{semesterId})
+        on duplicate key update
+            semester_id = values(semester_id)
+    </insert>
     <select id="queryAllSemester" resultType="edu.csu.codemanagesystem.infrastructure.po.Semester">
         select id, semester_id, name, start_time, end_time, status from semester;
     </select>

@@ -8,4 +8,6 @@ public interface ISemester {
     List<SemesterEntity> queryAllSemester();
 
     Boolean createSemester(SemesterEntity semester);
+
+    Boolean setCurrentSemester(Long semesterId);
 }

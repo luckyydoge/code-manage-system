@@ -8,4 +8,6 @@ public interface ISemesterRepository {
     List<SemesterEntity> queryAllSemester();
 
     void createSemester(SemesterEntity semester);
+
+    Boolean setCurrentSemester(Long semesterId);
 }

@@ -10,4 +10,6 @@ public interface ISemesterDao {
     List<Semester> queryAllSemester();
 
     void createSemester(Semester semester);
+
+    void setCurrentSemester(Long semesterId);
 }

@@ -43,4 +43,10 @@ public class SemesterRepository implements ISemesterRepository {
         semesterDao.createSemester(semester);
 
     }
+
+    @Override
+    public Boolean setCurrentSemester(Long semesterId) {
+        semesterDao.setCurrentSemester(semesterId);
+        return true;
+    }
 }

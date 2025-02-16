@@ -21,14 +21,14 @@ public class LoginController {
     public Response<String> login(@RequestBody UserEntity user) {
         if (login.login(user)) {
             return Response.<String>builder()
-                    .code("000")
-                    .info("")
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .info(ResponseCode.SUCCESS.getInfo())
                     .data(user.getType())
                     .build();
         }
         return Response.<String>builder()
-                .code("001")
-                .info("")
+                .code(ResponseCode.USERID_OR_PASSWORD_INCORRECT.getCode())
+                .info(ResponseCode.USERID_OR_PASSWORD_INCORRECT.getInfo())
                 .build();
 
     }

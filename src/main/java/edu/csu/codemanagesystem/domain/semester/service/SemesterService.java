@@ -35,4 +35,10 @@ public class SemesterService implements ISemester{
         semesterRepository.createSemester(semester);
         return true;
     }
+
+    @Override
+    public Boolean setCurrentSemester(Long semesterId) {
+        Boolean success = semesterRepository.setCurrentSemester(semesterId);
+        return success;
+    }
 }
