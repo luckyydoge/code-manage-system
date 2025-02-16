@@ -65,6 +65,16 @@ public class AdminController {
                 .build();
     }
 
+    @GetMapping("/admin/queryCurrentSemester")
+    public Response<SemesterEntity> queryCurrentSemester() {
+        SemesterEntity semester = semesterService.queryCurrentSemester();
+        return Response.<SemesterEntity>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(semester)
+                .build();
+    }
+
     @GetMapping("/admin/setCurrentSemester")
     public Response<Boolean> setCurrentSemester(@RequestParam Long semesterId) {
         Boolean success = semesterService.setCurrentSemester(semesterId);
