@@ -25,6 +25,7 @@ public class LoginService implements ILogin{
             log.info("{} login failed", userEntity.getUserId());
             return false;
         }
+        userEntity.setType(userEntityRes.getType());
         log.info("{} login success", userEntity.getUserId());
         return true;
     }
