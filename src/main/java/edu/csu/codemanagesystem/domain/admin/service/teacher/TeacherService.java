@@ -23,4 +23,9 @@ public class TeacherService implements ITeacherService {
         log.info("try to insert teacher : {}, status : {}", teacherEntity.getTeacherId(), success);
         return success;
     }
+
+    @Override
+    public Boolean deleteTeacher(TeacherEntity teacherEntity) {
+        return null;
+    }
 }

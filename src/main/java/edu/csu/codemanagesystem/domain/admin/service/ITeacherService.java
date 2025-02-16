@@ -5,4 +5,6 @@ import edu.csu.codemanagesystem.infrastructure.po.Teacher;
 
 public interface ITeacherService {
     Boolean addTeacher(TeacherEntity teacherEntity);
+
+    Boolean deleteTeacher(TeacherEntity teacherEntity);
 }

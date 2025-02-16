@@ -3,10 +3,15 @@ package edu.csu.codemanagesystem.domain.admin.service.backup;
 import edu.csu.codemanagesystem.domain.admin.service.IBackupService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
@@ -24,6 +29,9 @@ public class BackupServiceService implements IBackupService {
 
     private String cmd = "docker.exe";
 
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private long interval = 24 * 60 * 60 * 1000;
+
     @Override
     public void backup() {
 
@@ -36,8 +44,11 @@ public class BackupServiceService implements IBackupService {
                 System.out.print(command);
                 System.out.print(" ");
             });
+            long startTime = System.currentTimeMillis();
             Process p = pb.start();
             int exitCode = p.waitFor();
+            long endTime = System.currentTimeMillis();
+            log.info("use time : {}ms", (endTime - startTime));
             if (exitCode != 0) {
                 log.info("failed");
             }
@@ -45,33 +56,18 @@ public class BackupServiceService implements IBackupService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        String command = String.format("mysqldump -P %s -u %s -p%s code_manage_system > %s",
-//                port, username, password, backupFilePath);
-//        log.info(command);
+    }
 
-//        try {
-//            Process process = Runtime.getRuntime().exec(new String[] {"cmd.exe", "/c", command});
-//            int status = process.waitFor();
-//            if (0 != status) {
-//                log.error("mysqldump command failed");
-//            } else {
-//                log.info("mysqldump command success");
-//            }
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            Process process = Runtime.getRuntime().exec(command);
-//            InputStream inputStream = process.getErrorStream();
-//            int byteValue;
-//            while ((byteValue = inputStream.read()) != -1) {
-//                System.out.print((char) byteValue);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+    @Override
+    public Boolean setInterval(long interval) {
+        this.interval = interval;
+        scheduler.shutdown();
+        startTask();
+        return true;
+    }
 
+    @EventListener(ApplicationReadyEvent.class)
+    private void startTask() {
+        scheduler.scheduleAtFixedRate(this::backup, 0, interval, TimeUnit.MILLISECONDS);
     }
 }

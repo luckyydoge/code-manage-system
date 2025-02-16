@@ -149,7 +149,7 @@ CREATE TABLE `current_semester` (
   PRIMARY KEY (`id`),
   KEY `current_semester_semester_FK` (`semester_id`),
   CONSTRAINT `current_semester_semester_FK` FOREIGN KEY (`semester_id`) REFERENCES `semester` (`semester_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,6 +158,7 @@ CREATE TABLE `current_semester` (
 
 LOCK TABLES `current_semester` WRITE;
 /*!40000 ALTER TABLE `current_semester` DISABLE KEYS */;
+INSERT INTO `current_semester` VALUES (1,232402);
 /*!40000 ALTER TABLE `current_semester` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,7 +358,7 @@ CREATE TABLE `teacher` (
   `email` varchar(32) NOT NULL COMMENT '电子邮箱地址',
   PRIMARY KEY (`id`),
   UNIQUE KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='教师表';
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='教师表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,7 +367,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1,200001,'abc',''),(2,200002,'abd',''),(3,200003,'苏明宇','sumingyu@qq.com'),(34,200004,'赵悦','zhaoyue@qq.com'),(35,200005,'江南','jiangnan@qq.com'),(36,200006,'陈逸飞','chenyifei@qq.com'),(37,200007,'周星','zhouxing@qq.com'),(38,200008,'王思瑶','wangsiyao@qq.com'),(39,200009,'李梦琪','limengqi@qq.com'),(40,200010,'张逸尘','zhangyichen@qq.com'),(41,200011,'刘宇辰','liuyuchen@qq.com'),(42,200012,'吴星宇','wuxingyu@qq.com'),(43,200013,'赵悦琳','zhaoyuelin@qq.com'),(44,200014,'钱逸风','qianyifeng@qq.com'),(45,200015,'孙悦','sunyue@qq.com'),(46,200016,'李思远','lisiyuan@qq.com'),(47,200017,'周逸飞','zhouyifei@qq.com'),(48,200018,'吴宇航','wuyuhang@qq.com'),(49,200019,'陈悦瑶','chenyueyao@qq.com'),(50,200020,'王梦琪','wangmengqi@qq.com'),(51,200021,'赵思远','zhaosiyuan@qq.com'),(52,200022,'欧阳逸飞','ouyangyifei@qq.com'),(53,200023,'陆星瑶','luxingyao@qq.com'),(54,200024,'秦逸轩','qinyixuan@qq.com'),(55,200025,'江逸飞','jiangyifei@qq.com'),(56,200026,'范思远','fansiyuan@qq.com'),(57,200027,'郭梦琪','guomengqi@qq.com'),(58,200028,'雷宇辰','leiyuchen@qq.com'),(59,200029,'钟悦琳','zhongyuelin@qq.com'),(60,200030,'龙逸风','longyifeng@qq.com'),(61,200031,'伍星宇','wuxingyu@qq.com'),(62,200032,'欧阳逸尘','ouyangyichen@qq.com');
+INSERT INTO `teacher` VALUES (1,200001,'abc',''),(2,200002,'abd',''),(3,200003,'苏明宇','sumingyu@qq.com'),(34,200004,'赵悦','zhaoyue@qq.com'),(35,200005,'江南','jiangnan@qq.com'),(36,200006,'陈逸飞','chenyifei@qq.com'),(37,200007,'周星','zhouxing@qq.com'),(38,200008,'王思瑶','wangsiyao@qq.com'),(39,200009,'李梦琪','limengqi@qq.com'),(40,200010,'张逸尘','zhangyichen@qq.com'),(41,200011,'刘宇辰','liuyuchen@qq.com'),(42,200012,'吴星宇','wuxingyu@qq.com'),(43,200013,'赵悦琳','zhaoyuelin@qq.com'),(44,200014,'钱逸风','qianyifeng@qq.com'),(45,200015,'孙悦','sunyue@qq.com'),(46,200016,'李思远','lisiyuan@qq.com'),(47,200017,'周逸飞','zhouyifei@qq.com'),(48,200018,'吴宇航','wuyuhang@qq.com'),(49,200019,'陈悦瑶','chenyueyao@qq.com'),(50,200020,'王梦琪','wangmengqi@qq.com'),(51,200021,'赵思远','zhaosiyuan@qq.com'),(52,200022,'欧阳逸飞','ouyangyifei@qq.com'),(53,200023,'陆星瑶','luxingyao@qq.com'),(54,200024,'秦逸轩','qinyixuan@qq.com'),(55,200025,'江逸飞','jiangyifei@qq.com'),(56,200026,'范思远','fansiyuan@qq.com'),(57,200027,'郭梦琪','guomengqi@qq.com'),(58,200028,'雷宇辰','leiyuchen@qq.com'),(59,200029,'钟悦琳','zhongyuelin@qq.com'),(60,200030,'龙逸风','longyifeng@qq.com'),(61,200031,'伍星宇','wuxingyu@qq.com'),(62,200032,'test','test@qq.com');
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,10 +381,10 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `user_id` int NOT NULL COMMENT '用户id',
-  `password` varchar(16) NOT NULL COMMENT '密码',
+  `password` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '123456' COMMENT '密码',
   `type` varchar(8) NOT NULL COMMENT '类型 student | admin | teacher',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户登录表';
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户登录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -392,7 +393,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,100001,'123456','admin'),(2,100002,'222','student'),(35,200003,'123456','teacher'),(36,200004,'123456','teacher'),(37,200005,'123456','teacher'),(38,200006,'123456','teacher'),(39,200007,'123456','teacher'),(40,200008,'123456','teacher'),(41,200009,'123456','teacher'),(42,200010,'123456','teacher'),(43,200011,'123456','teacher'),(44,200012,'123456','teacher'),(45,200013,'123456','teacher'),(46,200014,'123456','teacher'),(47,200015,'123456','teacher'),(48,200016,'123456','teacher'),(49,200017,'123456','teacher'),(50,200018,'123456','teacher'),(51,200019,'123456','teacher'),(52,200020,'123456','teacher'),(53,200021,'123456','teacher'),(54,200022,'123456','teacher'),(55,200023,'123456','teacher'),(56,200024,'123456','teacher'),(57,200025,'123456','teacher'),(58,200026,'123456','teacher'),(59,200027,'123456','teacher'),(60,200028,'123456','teacher'),(61,200029,'123456','teacher'),(62,200030,'123456','teacher'),(63,200031,'123456','teacher'),(64,200032,'123456','teacher'),(65,300003,'123456','teacher'),(66,300004,'123456','teacher'),(67,300005,'123456','teacher'),(68,300006,'123456','teacher'),(69,300007,'123456','teacher'),(70,300008,'123456','teacher'),(71,300009,'123456','teacher'),(72,300010,'123456','teacher'),(73,300011,'123456','teacher'),(74,300012,'123456','teacher'),(75,300013,'123456','teacher'),(76,300014,'123456','teacher'),(77,300015,'123456','teacher'),(78,300016,'123456','teacher'),(79,300017,'123456','teacher'),(80,300018,'123456','teacher'),(81,300019,'123456','teacher'),(82,300020,'123456','teacher'),(83,300021,'123456','teacher'),(84,300022,'123456','teacher'),(85,300022,'123456','teacher'),(86,300023,'123456','teacher'),(87,300024,'123456','teacher'),(88,300025,'123456','teacher'),(89,300026,'123456','teacher'),(90,300027,'123456','teacher'),(91,300028,'123456','teacher'),(92,300029,'123456','teacher'),(93,300030,'123456','teacher'),(94,300031,'123456','teacher'),(95,300032,'123456','teacher'),(96,300033,'123456','teacher'),(97,300034,'123456','teacher'),(98,300035,'123456','teacher'),(99,300036,'123456','teacher'),(100,300037,'123456','teacher'),(101,300038,'123456','teacher'),(102,300039,'123456','teacher'),(103,300040,'123456','teacher'),(104,300041,'123456','teacher'),(105,300041,'123456','teacher'),(106,300042,'123456','teacher'),(107,300043,'123456','teacher'),(108,300044,'123456','teacher'),(109,300045,'123456','teacher'),(110,300046,'123456','teacher'),(111,300047,'123456','teacher'),(112,300048,'123456','teacher'),(113,300049,'123456','teacher'),(114,300050,'123456','teacher'),(115,300051,'123456','teacher'),(116,300052,'123456','teacher'),(117,300053,'123456','teacher'),(118,300054,'123456','teacher'),(119,300055,'123456','teacher'),(120,300056,'123456','teacher'),(121,300057,'123456','teacher'),(122,300058,'123456','teacher'),(123,300059,'123456','teacher'),(124,300060,'123456','teacher');
+INSERT INTO `users` VALUES (1,100001,'123456','admin'),(2,100002,'222','student'),(35,200003,'123456','teacher'),(36,200004,'123456','teacher'),(37,200005,'123456','teacher'),(38,200006,'123456','teacher'),(39,200007,'123456','teacher'),(40,200008,'123456','teacher'),(41,200009,'123456','teacher'),(42,200010,'123456','teacher'),(43,200011,'123456','teacher'),(44,200012,'123456','teacher'),(45,200013,'123456','teacher'),(46,200014,'123456','teacher'),(47,200015,'123456','teacher'),(48,200016,'123456','teacher'),(49,200017,'123456','teacher'),(50,200018,'123456','teacher'),(51,200019,'123456','teacher'),(52,200020,'123456','teacher'),(53,200021,'123456','teacher'),(54,200022,'123456','teacher'),(55,200023,'123456','teacher'),(56,200024,'123456','teacher'),(57,200025,'123456','teacher'),(58,200026,'123456','teacher'),(59,200027,'123456','teacher'),(60,200028,'123456','teacher'),(61,200029,'123456','teacher'),(62,200030,'123456','teacher'),(63,200031,'123456','teacher'),(64,200032,'123456','teacher'),(65,300003,'123456','teacher'),(66,300004,'123456','teacher'),(67,300005,'123456','teacher'),(68,300006,'123456','teacher'),(69,300007,'123456','teacher'),(70,300008,'123456','teacher'),(71,300009,'123456','teacher'),(72,300010,'123456','teacher'),(73,300011,'123456','teacher'),(74,300012,'123456','teacher'),(75,300013,'123456','teacher'),(76,300014,'123456','teacher'),(77,300015,'123456','teacher'),(78,300016,'123456','teacher'),(79,300017,'123456','teacher'),(80,300018,'123456','teacher'),(81,300019,'123456','teacher'),(82,300020,'123456','teacher'),(83,300021,'123456','teacher'),(84,300022,'123456','teacher'),(85,300022,'123456','teacher'),(86,300023,'123456','teacher'),(87,300024,'123456','teacher'),(88,300025,'123456','teacher'),(89,300026,'123456','teacher'),(90,300027,'123456','teacher'),(91,300028,'123456','teacher'),(92,300029,'123456','teacher'),(93,300030,'123456','teacher'),(94,300031,'123456','teacher'),(95,300032,'123456','teacher'),(96,300033,'123456','teacher'),(97,300034,'123456','teacher'),(98,300035,'123456','teacher'),(99,300036,'123456','teacher'),(100,300037,'123456','teacher'),(101,300038,'123456','teacher'),(102,300039,'123456','teacher'),(103,300040,'123456','teacher'),(104,300041,'123456','teacher'),(105,300041,'123456','teacher'),(106,300042,'123456','teacher'),(107,300043,'123456','teacher'),(108,300044,'123456','teacher'),(109,300045,'123456','teacher'),(110,300046,'123456','teacher'),(111,300047,'123456','teacher'),(112,300048,'123456','teacher'),(113,300049,'123456','teacher'),(114,300050,'123456','teacher'),(115,300051,'123456','teacher'),(116,300052,'123456','teacher'),(117,300053,'123456','teacher'),(118,300054,'123456','teacher'),(119,300055,'123456','teacher'),(120,300056,'123456','teacher'),(121,300057,'123456','teacher'),(122,300058,'123456','teacher'),(123,300059,'123456','teacher'),(124,300060,'123456','teacher'),(125,200032,'123456','teacher');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -405,4 +406,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-16 13:55:17
+-- Dump completed on 2025-02-16 17:47:38
