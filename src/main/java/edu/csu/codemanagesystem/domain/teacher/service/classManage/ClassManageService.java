@@ -18,6 +18,7 @@ public class ClassManageService implements IClassManageService {
 
     @Override
     public Boolean createClass(ClassEntity classEntity) {
-        return null;
+        teacherRepository.createClass(classEntity);
+        return true;
     }
 }

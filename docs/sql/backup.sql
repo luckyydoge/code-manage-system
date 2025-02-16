@@ -94,7 +94,7 @@ CREATE TABLE `class` (
   CONSTRAINT `class_ibfk_1` FOREIGN KEY (`semester_id`) REFERENCES `semester` (`semester_id`),
   CONSTRAINT `class_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
   CONSTRAINT `class_ibfk_3` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='教学班级表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='教学班级表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +132,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,1001,'高等数学上','2024-09-01 00:00:00','2025-01-01 00:00:00','disable'),(2,1002,'高等数学下','2024-09-01 00:00:00','2025-01-01 00:00:00','disable'),(3,1003,'大学物理','2024-09-01 00:00:00','2025-01-01 00:00:00','disable'),(4,1004,'模拟电路','2024-09-01 00:00:00','2025-01-01 00:00:00','disable'),(5,1111,'test','2020-02-02 08:00:00','2021-01-01 08:00:00','disable');
+INSERT INTO `course` VALUES (1,1001,'高等数学上','2024-09-01 00:00:00','2025-01-01 00:00:00','disable'),(2,1002,'高等数学下','2024-09-01 00:00:00','2025-01-01 00:00:00','disable'),(3,1003,'大学物理','2024-09-01 00:00:00','2025-01-01 00:00:00','disable'),(4,1004,'模拟电路','2024-09-01 00:00:00','2025-01-01 00:00:00','disable');
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +213,7 @@ CREATE TABLE `semester` (
   `status` varchar(16) NOT NULL DEFAULT 'disable' COMMENT '状态',
   PRIMARY KEY (`id`),
   UNIQUE KEY `semester_id` (`semester_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='学期表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='学期表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +222,7 @@ CREATE TABLE `semester` (
 
 LOCK TABLES `semester` WRITE;
 /*!40000 ALTER TABLE `semester` DISABLE KEYS */;
-INSERT INTO `semester` VALUES (1,232401,'2324学年第一学期','2023-09-01 00:00:00','2024-02-04 00:00:00','disable'),(2,232402,'2324学年第二学期','2024-02-04 00:00:00','2024-09-01 00:00:00','disable'),(3,242501,'2425学年第一学期','2024-09-01 00:00:00','2025-02-04 00:00:00','disable'),(4,242502,'2425学年第二学期','2025-02-04 00:00:00','2025-09-01 00:00:00','disable'),(5,262701,'111','1970-01-01 13:37:50','1970-01-01 13:37:50','disable');
+INSERT INTO `semester` VALUES (1,232401,'2324学年第一学期','2023-09-01 00:00:00','2024-02-04 00:00:00','disable'),(2,232402,'2324学年第二学期','2024-02-04 00:00:00','2024-09-01 00:00:00','disable'),(3,242501,'2425学年第一学期','2024-09-01 00:00:00','2025-02-04 00:00:00','disable'),(4,242502,'2425学年第二学期','2025-02-04 00:00:00','2025-09-01 00:00:00','disable');
 /*!40000 ALTER TABLE `semester` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,4 +406,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-16 20:33:01
+-- Dump completed on 2025-02-16 22:04:23
