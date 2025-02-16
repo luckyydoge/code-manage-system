@@ -1,4 +1,4 @@
-package edu.csu.codemanagesystem.domain.course.model.entity;
+package edu.csu.codemanagesystem.domain.admin.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

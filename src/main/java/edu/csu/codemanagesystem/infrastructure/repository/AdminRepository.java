@@ -1,9 +1,12 @@
 package edu.csu.codemanagesystem.infrastructure.repository;
 
-import edu.csu.codemanagesystem.domain.course.model.entity.CourseEntity;
-import edu.csu.codemanagesystem.domain.course.repository.ICourseRepository;
+import edu.csu.codemanagesystem.domain.admin.model.entity.CourseEntity;
+import edu.csu.codemanagesystem.domain.admin.model.entity.SemesterEntity;
+import edu.csu.codemanagesystem.domain.admin.repository.IAdminRepository;
 import edu.csu.codemanagesystem.infrastructure.dao.ICourseDao;
+import edu.csu.codemanagesystem.infrastructure.dao.ISemesterDao;
 import edu.csu.codemanagesystem.infrastructure.po.Course;
+import edu.csu.codemanagesystem.infrastructure.po.Semester;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class CourseRepository implements ICourseRepository {
+public class AdminRepository implements IAdminRepository {
+
+    @Autowired
+    ISemesterDao semesterDao;
+
 
     @Autowired
     ICourseDao courseDao;
@@ -47,5 +54,39 @@ public class CourseRepository implements ICourseRepository {
         course.setStartTime(courseEntity.getStartTime());
         course.setEndTime(courseEntity.getEndTime());
         courseDao.createCourse(course);
+    }
+
+    @Override
+    public List<SemesterEntity> queryAllSemester() {
+        List<Semester> semesterList = semesterDao.queryAllSemester();
+        List<SemesterEntity> semesterEntityList = new ArrayList<>();
+        semesterList.forEach(semester -> {
+            SemesterEntity semesterEntity = SemesterEntity.builder()
+                    .semesterId(semester.getSemesterId())
+                    .name(semester.getName())
+                    .endTime(semester.getEndTime())
+                    .startTime(semester.getStartTime())
+                    .status(semester.getStatus())
+                    .build();
+            semesterEntityList.add(semesterEntity);
+        });
+        return semesterEntityList;
+    }
+
+    @Override
+    public void createSemester(SemesterEntity semesterEntity) {
+        Semester semester = new Semester();
+        semester.setSemesterId(semesterEntity.getSemesterId());
+        semester.setName(semesterEntity.getName());
+        semester.setEndTime(semesterEntity.getEndTime());
+        semester.setStartTime(semesterEntity.getStartTime());
+        semesterDao.createSemester(semester);
+
+    }
+
+    @Override
+    public Boolean setCurrentSemester(Long semesterId) {
+        semesterDao.setCurrentSemester(semesterId);
+        return true;
     }
 }

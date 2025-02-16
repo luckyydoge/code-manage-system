@@ -1,7 +1,8 @@
-package edu.csu.codemanagesystem.domain.semester.service;
+package edu.csu.codemanagesystem.domain.admin.service.semester;
 
-import edu.csu.codemanagesystem.domain.semester.model.entity.SemesterEntity;
-import edu.csu.codemanagesystem.domain.semester.repository.ISemesterRepository;
+import edu.csu.codemanagesystem.domain.admin.model.entity.SemesterEntity;
+import edu.csu.codemanagesystem.domain.admin.repository.IAdminRepository;
+import edu.csu.codemanagesystem.domain.admin.service.ISemester;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +10,11 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class SemesterService implements ISemester{
+public class SemesterService implements ISemester {
 
-    final private ISemesterRepository semesterRepository;
+    final private IAdminRepository semesterRepository;
 
-    public SemesterService(ISemesterRepository semesterRepository) {
+    public SemesterService(IAdminRepository semesterRepository) {
         this.semesterRepository = semesterRepository;
     }
 

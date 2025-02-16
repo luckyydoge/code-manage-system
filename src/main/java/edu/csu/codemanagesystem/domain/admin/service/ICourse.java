@@ -1,6 +1,6 @@
-package edu.csu.codemanagesystem.domain.course.service;
+package edu.csu.codemanagesystem.domain.admin.service;
 
-import edu.csu.codemanagesystem.domain.course.model.entity.CourseEntity;
+import edu.csu.codemanagesystem.domain.admin.model.entity.CourseEntity;
 
 import java.util.List;
 

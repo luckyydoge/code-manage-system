@@ -1,12 +1,12 @@
 package edu.csu.codemanagesystem.trigger.http.controller;
 
-import edu.csu.codemanagesystem.domain.backup.service.IBackup;
-import edu.csu.codemanagesystem.domain.course.model.entity.CourseEntity;
-import edu.csu.codemanagesystem.domain.course.service.CourseService;
+import edu.csu.codemanagesystem.domain.admin.service.IBackup;
+import edu.csu.codemanagesystem.domain.admin.model.entity.CourseEntity;
+import edu.csu.codemanagesystem.domain.admin.service.course.CourseService;
 import edu.csu.codemanagesystem.domain.import_excel.service.IImportExcel;
 import edu.csu.codemanagesystem.domain.import_excel.service.ImportServiceFactory;
-import edu.csu.codemanagesystem.domain.semester.model.entity.SemesterEntity;
-import edu.csu.codemanagesystem.domain.semester.service.SemesterService;
+import edu.csu.codemanagesystem.domain.admin.model.entity.SemesterEntity;
+import edu.csu.codemanagesystem.domain.admin.service.semester.SemesterService;
 import edu.csu.codemanagesystem.type.Response;
 import edu.csu.codemanagesystem.type.ResponseCode;
 import jakarta.servlet.http.HttpServletResponse;

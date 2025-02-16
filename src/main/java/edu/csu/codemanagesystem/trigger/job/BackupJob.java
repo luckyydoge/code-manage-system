@@ -1,11 +1,10 @@
 package edu.csu.codemanagesystem.trigger.job;
 
-import edu.csu.codemanagesystem.domain.backup.service.IBackup;
+import edu.csu.codemanagesystem.domain.admin.service.IBackup;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 @Slf4j
