@@ -141,6 +141,16 @@ public class AdminController {
         return returnResponseByBoolean(success);
     }
 
+    @GetMapping("admin/queryBackupInterval")
+    public Response<Long> queryBackupInterval() {
+        Long interval = backupService.queryInterval();
+        return Response.<Long>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(interval)
+                .build();
+    }
+
     @GetMapping("/admin/backupDatabase")
     public Response<Boolean> backupDatabase() {
         backupService.backup();

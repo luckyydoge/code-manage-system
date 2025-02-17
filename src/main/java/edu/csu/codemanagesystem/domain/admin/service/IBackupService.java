@@ -1,7 +1,9 @@
 package edu.csu.codemanagesystem.domain.admin.service;
 
 public interface IBackupService {
-    public void backup();
+    void backup();
 
-    public Boolean setInterval(long interval);
+    Boolean setInterval(long interval);
+
+    Long queryInterval();
 }

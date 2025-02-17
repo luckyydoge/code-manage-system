@@ -66,6 +66,11 @@ public class BackupServiceService implements IBackupService {
         return true;
     }
 
+    @Override
+    public Long queryInterval() {
+        return interval;
+    }
+
     @EventListener(ApplicationReadyEvent.class)
     private void startTask() {
         scheduler.scheduleAtFixedRate(this::backup, 0, interval, TimeUnit.MILLISECONDS);
