@@ -29,7 +29,7 @@ public class BackupServiceService implements IBackupService {
 
     private String cmd = "docker.exe";
 
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private long interval = 24 * 60 * 60 * 1000;
 
     @Override
@@ -62,6 +62,7 @@ public class BackupServiceService implements IBackupService {
     public Boolean setInterval(long interval) {
         this.interval = interval;
         scheduler.shutdown();
+        scheduler = Executors.newScheduledThreadPool(1);
         startTask();
         return true;
     }
