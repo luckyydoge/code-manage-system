@@ -10,19 +10,19 @@
             parameterType="edu.csu.codemanagesystem.infrastructure.po.Course">
         select id, course_id, name, start_time, end_time, status from course
         where 1 = 1
-        <if test="courseId != null">
+        <if test="courseId != null and courseId != ''">
             and course_id = #{courseId}
         </if>
-        <if test="name != null">
+        <if test="name != null and name != ''">
             and name = #{name}
         </if>
-        <if test="startTime != null">
+        <if test="startTime != null and startTime != ''">
             and start_time = #{startTime}
         </if>
-        <if test="endTime != null">
+        <if test="endTime != null and endTime != ''">
             and end_time = #{endTime}
         </if>
-        <if test="status != null">
+        <if test="status != null and status != ''">
             and status = #{status}
         </if>
     </select>
