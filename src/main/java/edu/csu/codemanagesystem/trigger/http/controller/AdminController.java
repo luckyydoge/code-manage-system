@@ -135,7 +135,7 @@ public class AdminController {
                 .build();
     }
 
-    @GetMapping("/admin/setInterval")
+    @GetMapping("/admin/setBackupInterval")
     public Response<Boolean> setInterval(@RequestParam Long interval) {
         Boolean success =  backupService.setInterval(interval);
         return returnResponseByBoolean(success);
