@@ -22,4 +22,10 @@ public interface IAdminRepository {
     SemesterEntity queryCurrentSemester();
 
     List<TeacherEntity> queryAllTeachers();
+
+    List<CourseEntity> queryUpcomingCourse(CourseEntity courseReqFactor);
+
+    List<CourseEntity> queryOngoningCourse(CourseEntity courseReqFactor);
+
+    List<CourseEntity> queryCompletedCourse(CourseEntity courseReqFactor);
 }
