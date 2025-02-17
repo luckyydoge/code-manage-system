@@ -6,6 +6,8 @@ import edu.csu.codemanagesystem.domain.import_excel.model.TeacherEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class TeacherManageService implements ITeacherManageService {
@@ -26,5 +28,11 @@ public class TeacherManageService implements ITeacherManageService {
     @Override
     public Boolean deleteTeacher(TeacherEntity teacherEntity) {
         return null;
+    }
+
+    @Override
+    public List<TeacherEntity> queryAllTeachers() {
+        List<TeacherEntity> teacherEntityList = repository.queryAllTeachers();
+        return teacherEntityList;
     }
 }

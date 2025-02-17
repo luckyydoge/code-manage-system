@@ -104,6 +104,21 @@ public class AdminRepository implements IAdminRepository {
     }
 
     @Override
+    public List<TeacherEntity> queryAllTeachers() {
+        List<Teacher> teacherList = teacherDao.queryAllTeachers();
+        List<TeacherEntity> teacherEntityList = new ArrayList<>();
+        teacherList.forEach(teacher -> {
+            TeacherEntity teacherEntity = TeacherEntity.builder()
+                    .teacherId(teacher.getTeacherId())
+                    .name(teacher.getName())
+                    .email(teacher.getEmail())
+                    .build();
+            teacherEntityList.add(teacherEntity);
+        });
+        return teacherEntityList;
+    }
+
+    @Override
     public List<SemesterEntity> queryAllSemester() {
         List<Semester> semesterList = semesterDao.queryAllSemester();
         List<SemesterEntity> semesterEntityList = new ArrayList<>();

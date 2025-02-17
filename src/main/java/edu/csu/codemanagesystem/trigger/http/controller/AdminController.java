@@ -115,6 +115,16 @@ public class AdminController {
                 .build();
     }
 
+    @GetMapping("/admin/queryAllTeacher")
+    public Response<List<TeacherEntity>> queryAllTeacher() {
+        List<TeacherEntity> teacherList = teacherService.queryAllTeachers();
+        return Response.<List<TeacherEntity>>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(teacherList)
+                .build();
+    }
+
     @PostMapping("/admin/createCourse")
     public Response<Boolean> createCourse(@RequestBody CourseEntity course) {
         courseService.createCourse(course);

@@ -20,4 +20,6 @@ public interface IAdminRepository {
     Boolean createTeacher(TeacherEntity teacherEntity);
 
     SemesterEntity queryCurrentSemester();
+
+    List<TeacherEntity> queryAllTeachers();
 }

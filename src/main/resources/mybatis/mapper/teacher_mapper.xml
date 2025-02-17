@@ -14,4 +14,7 @@
     <select id="queryTeacherCount" resultType="java.lang.Integer">
         select count(*) from teacher;
     </select>
+    <select id="queryAllTeachers" resultType="edu.csu.codemanagesystem.infrastructure.po.Teacher">
+        select id, teacher_id, name, email from teacher;
+    </select>
 </mapper>

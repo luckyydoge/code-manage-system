@@ -10,4 +10,6 @@ public interface ITeacherDao {
     int queryTeacherCount();
 
     void insertTeacherBatch(List<Teacher> teacherList);
+
+    List<Teacher> queryAllTeachers();
 }
