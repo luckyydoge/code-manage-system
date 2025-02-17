@@ -76,7 +76,7 @@ public class AdminRepository implements IAdminRepository {
         teacher.setName(teacherEntity.getName());
         teacher.setEmail(teacherEntity.getEmail());
         int count = teacherDao.queryTeacherCount();
-        teacher.setTeacherId(count + teacherBaseCount);
+        teacher.setTeacherId(count + teacherBaseCount + 1);
         List<Teacher> teacherList = new ArrayList<>();
         teacherList.add(teacher);
         teacherDao.insertTeacherBatch(teacherList);
