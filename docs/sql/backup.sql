@@ -126,7 +126,7 @@ CREATE TABLE `course` (
   UNIQUE KEY `course_id` (`course_id`),
   KEY `course_semester_FK` (`semester_id`),
   CONSTRAINT `course_semester_FK` FOREIGN KEY (`semester_id`) REFERENCES `semester` (`semester_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='课程表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='课程表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,1001,'高等数学上','2024-09-01 00:00:00','2025-02-16 23:39:40','disable',232401),(2,1002,'高等数学下','2024-09-01 00:00:00','2025-02-16 23:39:40','disable',232401),(3,1003,'大学物理','2024-09-01 00:00:00','2025-02-16 23:39:40','disable',232401),(4,1004,'模拟电路','2024-09-01 00:00:00','2025-02-16 23:39:40','disable',232401),(7,1005,'实习','2026-09-01 00:00:00','2027-02-16 23:39:40','disable',232401);
+INSERT INTO `course` VALUES (1,1001,'高等数学上','2024-09-01 00:00:00','2025-02-16 23:39:40','disable',232401),(2,1002,'高等数学下','2024-09-01 00:00:00','2025-02-16 23:39:40','disable',232401),(3,1003,'大学物理','2024-09-01 00:00:00','2025-02-16 23:39:40','disable',232401),(4,1004,'模拟电路','2024-09-01 00:00:00','2025-02-16 23:39:40','disable',232401),(7,1005,'实习','2026-09-01 00:00:00','2027-02-16 23:39:40','disable',232401),(8,1006,'进行1','2024-09-01 00:00:00','2025-03-22 23:39:40','disable',242502),(9,1007,'进行2','2024-09-01 00:00:00','2025-03-22 23:39:40','disable',242502);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -409,4 +409,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-17 20:45:53
+-- Dump completed on 2025-02-17 21:05:29
