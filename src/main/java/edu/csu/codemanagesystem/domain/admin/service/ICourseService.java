@@ -9,4 +9,10 @@ public interface ICourseService {
 
     Boolean createCourse(CourseEntity course);
 
+    List<CourseEntity> queryUpcomingCourse(CourseEntity courseReqFactor);
+
+    List<CourseEntity> queryOngoingCourse(CourseEntity courseReqFactor);
+
+    List<CourseEntity> queryCompletedCourse(CourseEntity courseReqFactor);
+
 }

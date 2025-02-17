@@ -17,4 +17,5 @@ public class CourseEntity {
     private String status;
     private Date startTime;
     private Date endTime;
+    private Long semesterId;
 }

@@ -38,5 +38,23 @@ public class CourseServiceService implements ICourseService {
 
     }
 
+    @Override
+    public List<CourseEntity> queryUpcomingCourse(CourseEntity courseReqFactor) {
+        List<CourseEntity> courseEntityList = repository.queryUpcomingCourse(courseReqFactor);
+        return courseEntityList;
+    }
+
+    @Override
+    public List<CourseEntity> queryOngoingCourse(CourseEntity courseReqFactor) {
+        List<CourseEntity> courseEntityList = repository.queryOngoningCourse(courseReqFactor);
+        return courseEntityList;
+    }
+
+    @Override
+    public List<CourseEntity> queryCompletedCourse(CourseEntity courseReqFactor) {
+        List<CourseEntity> courseEntityList = repository.queryCompletedCourse(courseReqFactor);
+        return courseEntityList;
+    }
+
 
 }

@@ -44,6 +44,7 @@ public class AdminRepository implements IAdminRepository {
         courseReq.setName(courseReqFactor.getName());
         courseReq.setStartTime(courseReqFactor.getStartTime());
         courseReq.setEndTime(courseReqFactor.getEndTime());
+        courseReq.setSemesterId(courseReqFactor.getSemesterId());
         List<Course> courseList = courseDao.queryCourseByFactor(courseReq);
         List<CourseEntity> courseEntityList = new ArrayList<>();
         courseList.forEach(course -> {
@@ -53,6 +54,7 @@ public class AdminRepository implements IAdminRepository {
                     .status(course.getStatus())
                     .startTime(course.getStartTime())
                     .endTime(course.getEndTime())
+                    .semesterId(course.getSemesterId())
                     .build();
             courseEntityList.add(courseEntity);
         });
@@ -67,6 +69,7 @@ public class AdminRepository implements IAdminRepository {
         course.setName(courseEntity.getName());
         course.setStartTime(courseEntity.getStartTime());
         course.setEndTime(courseEntity.getEndTime());
+        course.setSemesterId(courseEntity.getSemesterId());
         courseDao.createCourse(course);
     }
 
@@ -116,6 +119,81 @@ public class AdminRepository implements IAdminRepository {
             teacherEntityList.add(teacherEntity);
         });
         return teacherEntityList;
+    }
+
+    @Override
+    public List<CourseEntity> queryUpcomingCourse(CourseEntity courseReqFactor) {
+        Course courseReq = new Course();
+        courseReq.setCourseId(courseReqFactor.getCourseId());
+        courseReq.setName(courseReqFactor.getName());
+        courseReq.setStartTime(courseReqFactor.getStartTime());
+        courseReq.setEndTime(courseReqFactor.getEndTime());
+        courseReq.setSemesterId(courseReqFactor.getSemesterId());
+        List<Course> courseList = courseDao.queryUpcomingCourseByFactor(courseReq);
+        List<CourseEntity> courseEntityList = new ArrayList<>();
+        courseList.forEach(course -> {
+            CourseEntity courseEntity = CourseEntity.builder()
+                    .courseId(course.getCourseId())
+                    .name(course.getName())
+                    .status(course.getStatus())
+                    .startTime(course.getStartTime())
+                    .endTime(course.getEndTime())
+                    .semesterId(course.getSemesterId())
+                    .build();
+            courseEntityList.add(courseEntity);
+        });
+
+        return courseEntityList;
+    }
+
+    @Override
+    public List<CourseEntity> queryOngoningCourse(CourseEntity courseReqFactor) {
+        Course courseReq = new Course();
+        courseReq.setCourseId(courseReqFactor.getCourseId());
+        courseReq.setName(courseReqFactor.getName());
+        courseReq.setStartTime(courseReqFactor.getStartTime());
+        courseReq.setEndTime(courseReqFactor.getEndTime());
+        courseReq.setSemesterId(courseReqFactor.getSemesterId());
+        List<Course> courseList = courseDao.queryOngoingCourseByFactor(courseReq);
+        List<CourseEntity> courseEntityList = new ArrayList<>();
+        courseList.forEach(course -> {
+            CourseEntity courseEntity = CourseEntity.builder()
+                    .courseId(course.getCourseId())
+                    .name(course.getName())
+                    .status(course.getStatus())
+                    .startTime(course.getStartTime())
+                    .endTime(course.getEndTime())
+                    .semesterId(course.getSemesterId())
+                    .build();
+            courseEntityList.add(courseEntity);
+        });
+
+        return courseEntityList;
+    }
+
+    @Override
+    public List<CourseEntity> queryCompletedCourse(CourseEntity courseReqFactor) {
+        Course courseReq = new Course();
+        courseReq.setCourseId(courseReqFactor.getCourseId());
+        courseReq.setName(courseReqFactor.getName());
+        courseReq.setStartTime(courseReqFactor.getStartTime());
+        courseReq.setEndTime(courseReqFactor.getEndTime());
+        courseReq.setSemesterId(courseReqFactor.getSemesterId());
+        List<Course> courseList = courseDao.queryCompletedCourseByFactor(courseReq);
+        List<CourseEntity> courseEntityList = new ArrayList<>();
+        courseList.forEach(course -> {
+            CourseEntity courseEntity = CourseEntity.builder()
+                    .courseId(course.getCourseId())
+                    .name(course.getName())
+                    .status(course.getStatus())
+                    .startTime(course.getStartTime())
+                    .endTime(course.getEndTime())
+                    .semesterId(course.getSemesterId())
+                    .build();
+            courseEntityList.add(courseEntity);
+        });
+
+        return courseEntityList;
     }
 
     @Override

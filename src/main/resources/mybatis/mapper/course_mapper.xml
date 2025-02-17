@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.csu.codemanagesystem.infrastructure.dao.ICourseDao">
     <insert id="createCourse" parameterType="edu.csu.codemanagesystem.infrastructure.po.Course">
-        insert into course (course_id, name, start_time, end_time)
-            values (#{courseId}, #{name}, #{startTime}, #{endTime});
+        insert into course (course_id, name, start_time, end_time, semester_id)
+        values (#{courseId}, #{name}, #{startTime}, #{endTime}, #{semesterId});
     </insert>
 
     <select id="queryCourseByFactor" resultType="edu.csu.codemanagesystem.infrastructure.po.Course"
             parameterType="edu.csu.codemanagesystem.infrastructure.po.Course">
-        select id, course_id, name, start_time, end_time, status from course
+        select id, course_id, name, start_time, end_time, status, semester_id from course
         where 1 = 1
         <if test="courseId != null and courseId != ''">
             and course_id = #{courseId}
@@ -25,5 +25,60 @@
         <if test="status != null and status != ''">
             and status = #{status}
         </if>
+        <if test="semesterId != null and semesterId != ''">
+            and semester_id = #{semesterId}
+        </if>
+    </select>
+    <select id="queryUpcomingCourseByFactor" resultType="edu.csu.codemanagesystem.infrastructure.po.Course">
+        select id, course_id, name, start_time, end_time, status, semester_id from course
+        where
+        start_time > now()
+        <if test="courseId != null and courseId != ''">
+            and course_id = #{courseId}
+        </if>
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+        <if test="semesterId != null and semesterId != ''">
+            and semester_id = #{semesterId}
+        </if>
+    </select>
+    <select id="queryOngoingCourseByFactor" resultType="edu.csu.codemanagesystem.infrastructure.po.Course">
+        select id, course_id, name, start_time, end_time, status, semester_id from course
+        where
+            now() > start_time and end_time > now()
+        <if test="courseId != null and courseId != ''">
+            and course_id = #{courseId}
+        </if>
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+        <if test="semesterId != null and semesterId != ''">
+            and semester_id = #{semesterId}
+        </if>
+    </select>
+    <select id="queryCompletedCourseByFactor" resultType="edu.csu.codemanagesystem.infrastructure.po.Course">
+        select id, course_id, name, start_time, end_time, status, semester_id from course
+        where
+            now() > end_time
+        <if test="courseId != null and courseId != ''">
+            and course_id = #{courseId}
+        </if>
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+        <if test="semesterId != null and semesterId != ''">
+            and semester_id = #{semesterId}
+        </if>
+
     </select>
 </mapper>

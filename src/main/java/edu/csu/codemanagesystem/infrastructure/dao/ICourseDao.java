@@ -10,4 +10,10 @@ public interface ICourseDao {
     List<Course> queryCourseByFactor(Course course);
 
     void createCourse(Course course);
+
+    List<Course> queryUpcomingCourseByFactor(Course courseReq);
+
+    List<Course> queryOngoingCourseByFactor(Course courseReq);
+
+    List<Course> queryCompletedCourseByFactor(Course courseReq);
 }

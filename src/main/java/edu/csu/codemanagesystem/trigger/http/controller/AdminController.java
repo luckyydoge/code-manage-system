@@ -115,6 +115,36 @@ public class AdminController {
                 .build();
     }
 
+    @PostMapping("/admin/queryUpcomingCourse")
+    public Response<List<CourseEntity>> queryUpcomingCourse(@RequestBody CourseEntity courseReqFactor) {
+        List<CourseEntity> result = courseService.queryUpcomingCourse(courseReqFactor);
+        return Response.<List<CourseEntity>>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(result)
+                .build();
+    }
+
+    @PostMapping("/admin/queryOngoingCourse")
+    public Response<List<CourseEntity>> queryOngoingCourse(@RequestBody CourseEntity courseReqFactor) {
+        List<CourseEntity> result = courseService.queryOngoingCourse(courseReqFactor);
+        return Response.<List<CourseEntity>>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(result)
+                .build();
+    }
+
+    @PostMapping("/admin/queryCompletedCourse")
+    public Response<List<CourseEntity>> queryCompletedCourse(@RequestBody CourseEntity courseReqFactor) {
+        List<CourseEntity> result = courseService.queryCompletedCourse(courseReqFactor);
+        return Response.<List<CourseEntity>>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(result)
+                .build();
+    }
+
     @GetMapping("/admin/queryAllTeacher")
     public Response<List<TeacherEntity>> queryAllTeacher() {
         List<TeacherEntity> teacherList = teacherService.queryAllTeachers();

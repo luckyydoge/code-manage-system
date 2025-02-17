@@ -12,4 +12,5 @@ public class Course {
     private String status;
     private Date startTime;
     private Date endTime;
+    private Long semesterId;
 }
