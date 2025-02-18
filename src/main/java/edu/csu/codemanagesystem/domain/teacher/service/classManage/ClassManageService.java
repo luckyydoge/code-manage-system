@@ -6,6 +6,8 @@ import edu.csu.codemanagesystem.domain.teacher.service.IClassManageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class ClassManageService implements IClassManageService {
@@ -20,5 +22,12 @@ public class ClassManageService implements IClassManageService {
     public Boolean createClass(ClassEntity classEntity) {
         teacherRepository.createClass(classEntity);
         return true;
+    }
+
+    @Override
+    public List<ClassEntity> queryClassByFactor(ClassEntity classEntityFactor) {
+        List<ClassEntity> classEntitiesList = teacherRepository.queryClassByFactor(classEntityFactor);
+        log.info("queryClassByFactor factor:{}, classEntitiesList:{}", classEntityFactor, classEntitiesList);
+        return classEntitiesList;
     }
 }

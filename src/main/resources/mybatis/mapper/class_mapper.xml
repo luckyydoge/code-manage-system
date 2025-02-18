@@ -12,4 +12,26 @@
     <select id="queryCourseNameByCourseId" resultType="java.lang.String">
         select name from course where course_id = #{couseId};
     </select>
+    <select id="queryClassByFactor" resultType="edu.csu.codemanagesystem.infrastructure.po.ClassPO">
+        select id, class_id, name, people_count, semester_id, course_id, teacher_id from class
+        where 1 = 1
+        <if test="classId != null and classId != ''">
+            and class_id = #{classId}
+        </if>
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="peopleCount != null and peopleCount != ''">
+            and people_count = #{peopleCount}
+        </if>
+        <if test="semesterId != null and semesterId != ''">
+            and semester_id = #{semesterId}
+        </if>
+        <if test="courseId != null and courseId != ''">
+            and course_id = #{courseId}
+        </if>
+        <if test="teacherId != null and teacherId != ''">
+            and teacher_id = #{teacherId}
+        </if>
+    </select>
 </mapper>

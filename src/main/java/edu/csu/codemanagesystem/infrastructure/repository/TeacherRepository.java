@@ -110,5 +110,30 @@ public class TeacherRepository implements ITeacherRepository {
         });
         this.insertStudentJob(jobEntity.getJobId(), studentIdList);
     }
+
+    @Override
+    public List<ClassEntity> queryClassByFactor(ClassEntity classEntityFactor) {
+        ClassPO classReq = new ClassPO();
+        classReq.setName(classEntityFactor.getName());
+        classReq.setTeacherId(classEntityFactor.getTeacherId());
+        classReq.setSemesterId(classEntityFactor.getSemesterId());
+        classReq.setPeopleCount(classEntityFactor.getPeopleCount());
+        classReq.setCourseId(classEntityFactor.getCourseId());
+        classReq.setClassId(classEntityFactor.getClassId());
+        List<ClassPO> classPOList = classDao.queryClassByFactor();
+        List<ClassEntity> classEntityList = new ArrayList<>();
+        classPOList.forEach(classPO -> {
+            ClassEntity classEntity = ClassEntity.builder()
+                    .classId(classPO.getClassId())
+                    .name(classPO.getName())
+                    .peopleCount(classPO.getPeopleCount())
+                    .semesterId(classPO.getSemesterId())
+                    .courseId(classPO.getCourseId())
+                    .teacherId(classPO.getTeacherId())
+                    .build();
+            classEntityList.add(classEntity);
+        });
+        return classEntityList;
+    }
 }
 
