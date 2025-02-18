@@ -10,4 +10,6 @@ public interface IStudentDao {
     int queryStudentCount();
 
     void insertStudentBatch(List<Student> studentList);
+
+    List<Student> queryStudentByStudentIdList(List<Long> studentIdList);
 }

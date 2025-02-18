@@ -29,7 +29,7 @@ public abstract class AbstractImport<T> implements IImportExcel<T>{
         List<T> cacheList = new ArrayList<>(55);
         log.info("input stream {}", inputStream.toString());
         FastExcel.read(inputStream, getClazz(), new ReadListener<T>() {
-            int count = getCount();
+            int count = getCount() + 1;
 
             @Override
             public void invoke(T entity, AnalysisContext analysisContext) {

@@ -3,12 +3,11 @@
 <mapper namespace="edu.csu.codemanagesystem.infrastructure.dao.IStudentDao">
     <insert id="insertStudentBatch" parameterType="java.util.List">
         insert into student (student_id, name, sex, phone_number, email, administrative_class) values
-            <foreach collection="list" item="student" separator=",">
-                (#{student.studentId}, #{student.name}, #{student.sex}, #{student.phoneNumber}, #{student.email}, #{student.administrativeClass})
-            </foreach>
+        <foreach collection="list" item="student" separator=",">
+            (#{student.studentId}, #{student.name}, #{student.sex}, #{student.phoneNumber}, #{student.email},
+            #{student.administrativeClass})
+        </foreach>
         on duplicate key update
-            student_id = values (student_id),
-        name = values (name),
         sex = values (sex),
         phone_number = values (phone_number),
         email = values (email),
@@ -17,5 +16,12 @@
     <select id="queryStudentCount" resultType="java.lang.Integer">
         select count(*)
         from student;
+    </select>
+    <select id="queryStudentByStudentIdList" resultType="edu.csu.codemanagesystem.infrastructure.po.Student">
+        select id, student_id, name, sex, phone_number, email, administrative_class from student
+        where student_id in
+            <foreach item="studentId" collection="list" open="(" separator="," close=")">
+                #{studentId}
+            </foreach>
     </select>
 </mapper>

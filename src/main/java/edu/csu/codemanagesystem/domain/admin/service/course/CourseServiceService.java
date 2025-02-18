@@ -32,6 +32,8 @@ public class CourseServiceService implements ICourseService {
 //        || course.getStartTime() == null || course.getEndTime() == null) {
 //            return false;
 //        }
+        long count = repository.queryCourseCount();
+        course.setCourseId(count + 1);
         repository.createCourse(course);
         log.info("create course {}", course);
         return true;

@@ -81,4 +81,7 @@
         </if>
 
     </select>
+    <select id="queryCourseCount" resultType="java.lang.Long">
+        select count(*) from course;
+    </select>
 </mapper>

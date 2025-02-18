@@ -28,4 +28,6 @@ public interface IAdminRepository {
     List<CourseEntity> queryOngoningCourse(CourseEntity courseReqFactor);
 
     List<CourseEntity> queryCompletedCourse(CourseEntity courseReqFactor);
+
+    long queryCourseCount();
 }

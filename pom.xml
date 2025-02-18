@@ -118,6 +118,11 @@
             <artifactId>fastexcel</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>dm20151123</artifactId>
+            <version>1.2.2</version>
+        </dependency>
     </dependencies>
 
     <build>

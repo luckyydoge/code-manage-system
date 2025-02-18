@@ -9,4 +9,7 @@
     <select id="queryClassCount" resultType="java.lang.Integer">
         select count(*) from class;
     </select>
+    <select id="queryCourseNameByCourseId" resultType="java.lang.String">
+        select name from course where course_id = #{couseId};
+    </select>
 </mapper>

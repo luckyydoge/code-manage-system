@@ -4,7 +4,9 @@ import edu.csu.codemanagesystem.domain.import_excel.service.IImportExcel;
 import edu.csu.codemanagesystem.domain.import_excel.service.ImportServiceFactory;
 import edu.csu.codemanagesystem.domain.import_excel.service.impl.ImportStudentInfo;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.ClassEntity;
+import edu.csu.codemanagesystem.domain.teacher.model.entity.JobEntity;
 import edu.csu.codemanagesystem.domain.teacher.service.IClassManageService;
+import edu.csu.codemanagesystem.domain.teacher.service.IJobService;
 import edu.csu.codemanagesystem.type.Response;
 import edu.csu.codemanagesystem.type.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +22,9 @@ import java.io.IOException;
 @RestController
 @Slf4j
 public class TeacherController {
+
+    @Autowired
+    IJobService jobService;
 
     @Autowired
     private ImportServiceFactory importServiceFactory;
@@ -49,6 +54,13 @@ public class TeacherController {
     public Response<String> createClass(@RequestBody ClassEntity classEntity) {
         Boolean success = classManageService.createClass(classEntity);
         return returnStringResponseByBoolean(success);
+    }
+
+    @PostMapping("/teacher/createJob")
+    public Response<String> createJob(@RequestBody JobEntity jobEntity) {
+        jobService.createJob(jobEntity);
+        return returnStringResponseByBoolean(true);
+
     }
 
     private Response<String> returnStringResponseByBoolean(Boolean success) {

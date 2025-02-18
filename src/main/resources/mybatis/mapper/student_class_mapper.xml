@@ -7,4 +7,7 @@
                 (#{item.studentId}, #{item.classId})
             </foreach>
     </insert>
+    <select id="queryStudentIdByClassId" resultType="java.lang.Long">
+        select student_id from student_class where class_id = #{classId};
+    </select>
 </mapper>

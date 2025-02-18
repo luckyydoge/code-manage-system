@@ -197,6 +197,11 @@ public class AdminRepository implements IAdminRepository {
     }
 
     @Override
+    public long queryCourseCount() {
+        return courseDao.queryCourseCount();
+    }
+
+    @Override
     public List<SemesterEntity> queryAllSemester() {
         List<Semester> semesterList = semesterDao.queryAllSemester();
         List<SemesterEntity> semesterEntityList = new ArrayList<>();

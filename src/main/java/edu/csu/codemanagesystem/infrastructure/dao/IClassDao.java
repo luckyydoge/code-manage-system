@@ -8,4 +8,6 @@ public interface IClassDao {
     int queryClassCount();
 
     void createClass(ClassPO classPo);
+
+    String queryCourseNameByCourseId(Long courseId);
 }

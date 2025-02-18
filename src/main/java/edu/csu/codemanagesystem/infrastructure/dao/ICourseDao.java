@@ -16,4 +16,6 @@ public interface ICourseDao {
     List<Course> queryOngoingCourseByFactor(Course courseReq);
 
     List<Course> queryCompletedCourseByFactor(Course courseReq);
+
+    long queryCourseCount();
 }
