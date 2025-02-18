@@ -8,4 +8,7 @@
                 (#{studentJob.jobId}, #{studentJob.studentId})
             </foreach>
     </insert>
+    <select id="queryJobIdByStudentId" resultType="java.lang.Long">
+        select job_id from student_job where student_id = #{studentId};
+    </select>
 </mapper>

@@ -135,5 +135,56 @@ public class TeacherRepository implements ITeacherRepository {
         });
         return classEntityList;
     }
+
+    @Override
+    public List<JobEntity> queryJobByFactor(JobEntity jobEntityFactor) {
+        Job jobReq = new Job();
+        jobReq.setJobId(jobEntityFactor.getJobId());
+        jobReq.setTitle(jobEntityFactor.getTitle());
+        jobReq.setContent(jobEntityFactor.getContent());
+        jobReq.setCourseId(jobEntityFactor.getCourseId());
+        jobReq.setClassId(jobEntityFactor.getClassId());
+        jobReq.setStartTime(jobEntityFactor.getStartTime());
+        jobReq.setEndTime(jobEntityFactor.getEndTime());
+        List<Job> jobList = jobDao.queryJobByFactor(jobReq);
+        List<JobEntity> jobEntityList = new ArrayList<>();
+        jobList.forEach(job -> {
+            JobEntity jobEntity = JobEntity.builder()
+                    .jobId(job.getJobId())
+                    .title(job.getTitle())
+                    .content(job.getContent())
+                    .courseId(job.getCourseId())
+                    .classId(job.getClassId())
+                    .startTime(job.getStartTime())
+                    .endTime(job.getEndTime())
+                    .build();
+            jobEntityList.add(jobEntity);
+        });
+        return jobEntityList;
+    }
+
+    @Override
+    public List<Long> queryJobIdByStudentId(Long studentId) {
+        return studentJobDao.queryJobIdByStudentId(studentId);
+    }
+
+    @Override
+    public List<JobEntity> queryJobByJobId(List<Long> jobIdList) {
+        List<Job> jobList = jobDao.queryJobByJobId(jobIdList);
+        List<JobEntity> jobEntityList = new ArrayList<>();
+        jobList.forEach(job -> {
+            JobEntity jobEntity = JobEntity.builder()
+                    .jobId(job.getJobId())
+                    .title(job.getTitle())
+                    .content(job.getContent())
+                    .courseId(job.getCourseId())
+                    .classId(job.getClassId())
+                    .startTime(job.getStartTime())
+                    .endTime(job.getEndTime())
+                    .build();
+            jobEntityList.add(jobEntity);
+        });
+        return jobEntityList;
+    }
 }
 

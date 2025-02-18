@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface IStudentJobDao {
     void insertStudentJobBatch(List<StudentJob> studentJobList);
+
+    List<Long> queryJobIdByStudentId(Long studentId);
 }

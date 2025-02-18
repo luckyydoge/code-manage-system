@@ -73,6 +73,15 @@ public class TeacherController {
                 .data(classEntityList).build();
     }
 
+    @PostMapping("/teacher/queryJobByFactor")
+    public Response<List<JobEntity>> queryJobByFactor(@RequestBody JobEntity jobEntity) {
+        List<JobEntity> jobEntityList = jobService.queryJobByFactor(jobEntity);
+        return Response.<List<JobEntity>>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(jobEntityList).build();
+    }
+
     private Response<String> returnStringResponseByBoolean(Boolean success) {
         if (success) {
             return Response.<String>builder()

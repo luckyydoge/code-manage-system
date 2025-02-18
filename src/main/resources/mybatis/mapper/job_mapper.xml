@@ -9,4 +9,30 @@
     <select id="queryJobCount" resultType="java.lang.Integer">
         select count(*) from job;
     </select>
+    <select id="queryJobByFactor" resultType="edu.csu.codemanagesystem.infrastructure.po.Job">
+        select id, job_id, title, content, course_id, class_id from job
+        where 1 = 1
+        <if test="jobId != null and jobId != ''">
+            and job_id = #{jobId}
+        </if>
+        <if test="title != null and title != ''">
+            and title = #{title}
+        </if>
+        <if test="content != null and content != ''">
+            and content = #{content}
+        </if>
+        <if test="courseId != null and courseId != ''">
+            and courseId = #{courseId}
+        </if>
+        <if test="classId != null and classId != ''">
+            and class_id = #{classId}
+        </if>
+    </select>
+    <select id="queryJobByJobId" resultType="edu.csu.codemanagesystem.infrastructure.po.Job">
+        select id, job_id, title, content, course_id, class_id from job
+        where job_id in
+            <foreach collection="list" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+    </select>
 </mapper>

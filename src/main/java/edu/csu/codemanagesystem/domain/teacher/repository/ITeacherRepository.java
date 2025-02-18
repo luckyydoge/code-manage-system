@@ -21,4 +21,10 @@ public interface ITeacherRepository {
     void insertJobAndStudentIntoDatabase(JobEntity jobEntity, List<StudentEntity> studentEntityList);
 
     List<ClassEntity> queryClassByFactor(ClassEntity classEntityFactor);
+
+    List<JobEntity> queryJobByFactor(JobEntity jobEntityFactor);
+
+    List<Long> queryJobIdByStudentId(Long studentId);
+
+    List<JobEntity> queryJobByJobId(List<Long> jobIdList);
 }
