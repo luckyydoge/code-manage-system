@@ -35,4 +35,10 @@ public class TeacherManageService implements ITeacherManageService {
         List<TeacherEntity> teacherEntityList = repository.queryAllTeachers();
         return teacherEntityList;
     }
+
+    @Override
+    public TeacherEntity queryTeacherById(Long id) {
+        return repository.queryTeacherById(id);
+
+    }
 }

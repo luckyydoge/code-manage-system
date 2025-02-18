@@ -12,4 +12,6 @@ public interface IStudentDao {
     void insertStudentBatch(List<Student> studentList);
 
     List<Student> queryStudentByStudentIdList(List<Long> studentIdList);
+
+    List<Student> queryStudentByFactor(Student req);
 }

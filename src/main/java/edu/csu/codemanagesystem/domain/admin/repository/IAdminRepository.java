@@ -30,4 +30,6 @@ public interface IAdminRepository {
     List<CourseEntity> queryCompletedCourse(CourseEntity courseReqFactor);
 
     long queryCourseCount();
+
+    TeacherEntity queryTeacherById(Long id);
 }

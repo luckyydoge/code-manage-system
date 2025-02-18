@@ -17,4 +17,8 @@
     <select id="queryAllTeachers" resultType="edu.csu.codemanagesystem.infrastructure.po.Teacher">
         select id, teacher_id, name, email from teacher;
     </select>
+    <select id="queryTeacherById"
+            resultType="edu.csu.codemanagesystem.infrastructure.po.Teacher">
+        select id, teacher_id, name, email from teacher where teacher_id = #{id}
+    </select>
 </mapper>

@@ -10,4 +10,6 @@ public interface ITeacherManageService {
     Boolean deleteTeacher(TeacherEntity teacherEntity);
 
     List<TeacherEntity> queryAllTeachers();
+
+    TeacherEntity queryTeacherById(Long id);
 }

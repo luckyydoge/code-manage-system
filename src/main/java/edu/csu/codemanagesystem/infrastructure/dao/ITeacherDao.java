@@ -12,4 +12,6 @@ public interface ITeacherDao {
     void insertTeacherBatch(List<Teacher> teacherList);
 
     List<Teacher> queryAllTeachers();
+
+    Teacher queryTeacherById(Long id);
 }

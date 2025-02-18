@@ -24,4 +24,26 @@
                 #{studentId}
             </foreach>
     </select>
+    <select id="queryStudentByFactor" resultType="edu.csu.codemanagesystem.infrastructure.po.Student">
+        select id, student_id, name, sex, phone_number, email, administrative_class from student
+        where 1 = 1
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="studentId != null and studentId != ''">
+            and studen_id = #{studentId}
+        </if>
+        <if test="sex != null and sex != ''">
+            and sex = #{sex}
+        </if>
+        <if test="email != null and email != ''">
+            and email = #{email}
+        </if>
+        <if test="phoneNumber != null and phoneNumber != ''">
+            and phone_number = #{phoneNumber}
+        </if>
+        <if test="administrativeClass != null and administrativeClass != ''">
+            and administrative_class = #{administrativeClass}
+        </if>
+    </select>
 </mapper>

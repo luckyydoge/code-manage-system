@@ -205,6 +205,16 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/api/queryTeacherById")
+    public Response<TeacherEntity> queryTeacherByTeacherId(@RequestParam Long id) {
+        TeacherEntity teacherEntity = teacherService.queryTeacherById(id);
+        return Response.<TeacherEntity>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(teacherEntity)
+                .build();
+    }
+
     private Response<Boolean> returnResponseByBoolean(Boolean success) {
         if (success) {
             return Response.<Boolean>builder()
