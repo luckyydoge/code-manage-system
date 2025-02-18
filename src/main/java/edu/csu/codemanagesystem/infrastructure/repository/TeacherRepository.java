@@ -3,6 +3,7 @@ package edu.csu.codemanagesystem.infrastructure.repository;
 import edu.csu.codemanagesystem.domain.import_excel.model.StudentEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.ClassEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.JobEntity;
+import edu.csu.codemanagesystem.domain.teacher.model.entity.StudentJobEntity;
 import edu.csu.codemanagesystem.domain.teacher.repository.ITeacherRepository;
 import edu.csu.codemanagesystem.infrastructure.dao.*;
 import edu.csu.codemanagesystem.infrastructure.po.ClassPO;
@@ -185,6 +186,21 @@ public class TeacherRepository implements ITeacherRepository {
             jobEntityList.add(jobEntity);
         });
         return jobEntityList;
+    }
+
+    @Override
+    public List<Long> queryJobIdByStudentJobFactor(StudentJobEntity factor) {
+        StudentJob req = new StudentJob();
+        req.setStudentId(factor.getStudentId());
+        req.setJobId(factor.getJobId());
+        req.setStatus(factor.getStatus());
+        List<StudentJob> res = studentJobDao.queryStudentJobByFactor(req);
+        List<Long> jobIdList = new ArrayList<>();
+        res.forEach(studentJob -> {
+            jobIdList.add(studentJob.getJobId());
+        });
+        return jobIdList;
+
     }
 }
 

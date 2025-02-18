@@ -29,7 +29,7 @@
         </if>
     </select>
     <select id="queryJobByJobId" resultType="edu.csu.codemanagesystem.infrastructure.po.Job">
-        select id, job_id, title, content, course_id, class_id from job
+        select id, job_id, title, content, course_id, class_id, status, start_time, end_time from job
         where job_id in
             <foreach collection="list" item="item" open="(" close=")" separator=",">
                 #{item}

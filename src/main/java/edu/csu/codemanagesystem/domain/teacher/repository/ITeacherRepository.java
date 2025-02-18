@@ -3,6 +3,7 @@ package edu.csu.codemanagesystem.domain.teacher.repository;
 import edu.csu.codemanagesystem.domain.import_excel.model.StudentEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.ClassEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.JobEntity;
+import edu.csu.codemanagesystem.domain.teacher.model.entity.StudentJobEntity;
 import edu.csu.codemanagesystem.infrastructure.po.Job;
 
 import java.util.List;
@@ -27,4 +28,6 @@ public interface ITeacherRepository {
     List<Long> queryJobIdByStudentId(Long studentId);
 
     List<JobEntity> queryJobByJobId(List<Long> jobIdList);
+
+    List<Long> queryJobIdByStudentJobFactor(StudentJobEntity factor);
 }

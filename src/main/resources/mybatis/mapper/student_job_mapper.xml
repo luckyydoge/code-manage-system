@@ -11,4 +11,17 @@
     <select id="queryJobIdByStudentId" resultType="java.lang.Long">
         select job_id from student_job where student_id = #{studentId};
     </select>
+    <select id="queryStudentJobByFactor" resultType="edu.csu.codemanagesystem.infrastructure.po.StudentJob">
+        select id, job_id, student_id, status from student_job
+        where 1 = 1
+        <if test="jobId != null and jobId != ''">
+            and job_id = #{jobId}
+        </if>
+        <if test="studentId != null and studentId != ''">
+            and student_id = #{studentId}
+        </if>
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+    </select>
 </mapper>

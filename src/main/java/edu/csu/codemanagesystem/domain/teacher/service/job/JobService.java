@@ -3,6 +3,7 @@ package edu.csu.codemanagesystem.domain.teacher.service.job;
 import edu.csu.codemanagesystem.domain.import_excel.model.StudentEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.ClassEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.JobEntity;
+import edu.csu.codemanagesystem.domain.teacher.model.entity.StudentJobEntity;
 import edu.csu.codemanagesystem.domain.teacher.repository.ITeacherRepository;
 import edu.csu.codemanagesystem.domain.teacher.service.IEmailService;
 import edu.csu.codemanagesystem.domain.teacher.service.IJobService;
@@ -45,6 +46,13 @@ public class JobService implements IJobService {
     @Override
     public List<JobEntity> queryJobByStudentId(Long studentId) {
         List<Long> jobIdList = teacherRepository.queryJobIdByStudentId(studentId);
+        List<JobEntity> jobEntityList = teacherRepository.queryJobByJobId(jobIdList);
+        return jobEntityList;
+    }
+
+    @Override
+    public List<JobEntity> queryJobByStudentJobFactor(StudentJobEntity factor) {
+        List<Long> jobIdList = teacherRepository.queryJobIdByStudentJobFactor(factor);
         List<JobEntity> jobEntityList = teacherRepository.queryJobByJobId(jobIdList);
         return jobEntityList;
     }

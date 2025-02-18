@@ -10,4 +10,6 @@ public interface IStudentJobDao {
     void insertStudentJobBatch(List<StudentJob> studentJobList);
 
     List<Long> queryJobIdByStudentId(Long studentId);
+
+    List<StudentJob> queryStudentJobByFactor(StudentJob req);
 }
