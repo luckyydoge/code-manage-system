@@ -32,4 +32,6 @@ public interface IAdminRepository {
     long queryCourseCount();
 
     TeacherEntity queryTeacherById(Long id);
+
+    List<SemesterEntity> querySemesterByFactor(SemesterEntity semesterEntity);
 }

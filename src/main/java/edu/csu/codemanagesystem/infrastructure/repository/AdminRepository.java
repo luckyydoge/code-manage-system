@@ -212,6 +212,30 @@ public class AdminRepository implements IAdminRepository {
 
     }
 
+    @Override
+    public List<SemesterEntity> querySemesterByFactor(SemesterEntity factor) {
+        Semester req = new Semester();
+        req.setSemesterId(factor.getSemesterId());
+        req.setStatus(factor.getStatus());
+        req.setName(factor.getName());
+        req.setStartTime(factor.getStartTime());
+        req.setEndTime(factor.getEndTime());
+        List<Semester> semesterList = semesterDao.querySemesterByFactor(req);
+        List<SemesterEntity> semesterEntityList = new ArrayList<>();
+        semesterList.forEach(semester -> {
+            SemesterEntity semesterEntity = SemesterEntity.builder()
+                    .semesterId(semester.getSemesterId())
+                    .name(semester.getName())
+                    .endTime(semester.getEndTime())
+                    .startTime(semester.getStartTime())
+                    .status(semester.getStatus())
+                    .build();
+            semesterEntityList.add(semesterEntity);
+        });
+        return semesterEntityList;
+
+    }
+
 
     @Override
     public List<SemesterEntity> queryAllSemester() {

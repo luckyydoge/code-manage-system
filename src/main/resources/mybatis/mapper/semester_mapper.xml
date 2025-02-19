@@ -21,4 +21,16 @@
     <select id="querySemesterBySemesterId" resultType="edu.csu.codemanagesystem.infrastructure.po.Semester" parameterType="java.lang.Long">
         select id, semester_id, name, start_time, end_time, status from semester where semester_id = #{semesterId};
     </select>
+    <select id="querySemesterByFactor" resultType="edu.csu.codemanagesystem.infrastructure.po.Semester">
+        select id, semester_id, name, start_time, end_time, status from semester where 1 = 1
+        <if test="semesterId != null and semesterId != ''">
+            and semester_id = #{semesterId}
+        </if>
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+    </select>
 </mapper>

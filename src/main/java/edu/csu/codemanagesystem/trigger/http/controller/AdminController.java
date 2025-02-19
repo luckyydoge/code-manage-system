@@ -215,6 +215,16 @@ public class AdminController {
                 .build();
     }
 
+    @PostMapping("/api/querySemesterByFactor")
+    public Response<List<SemesterEntity>> querySemesterByFactor(@RequestBody SemesterEntity semesterEntity) {
+        List<SemesterEntity> semesterEntityList = semesterService.querySemesterByFactor(semesterEntity);
+        return Response.<List<SemesterEntity>>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(semesterEntityList)
+                .build();
+    }
+
     private Response<Boolean> returnResponseByBoolean(Boolean success) {
         if (success) {
             return Response.<Boolean>builder()

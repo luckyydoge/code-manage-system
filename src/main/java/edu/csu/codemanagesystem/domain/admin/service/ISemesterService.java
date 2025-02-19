@@ -12,4 +12,6 @@ public interface ISemesterService {
     Boolean setCurrentSemester(Long semesterId);
 
     SemesterEntity queryCurrentSemester();
+
+    List<SemesterEntity> querySemesterByFactor(SemesterEntity semesterEntity);
 }

@@ -16,4 +16,6 @@ public interface ISemesterDao {
     int querySemesterCount();
 
     Semester querySemesterBySemesterId(Long semesterId);
+
+    List<Semester> querySemesterByFactor(Semester req);
 }

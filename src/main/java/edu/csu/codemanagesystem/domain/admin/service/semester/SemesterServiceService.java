@@ -48,4 +48,10 @@ public class SemesterServiceService implements ISemesterService {
         SemesterEntity semesterEntity = semesterRepository.queryCurrentSemester();
         return semesterEntity;
     }
+
+    @Override
+    public List<SemesterEntity> querySemesterByFactor(SemesterEntity semesterEntity) {
+        List<SemesterEntity> semesterEntityList = semesterRepository.querySemesterByFactor(semesterEntity);
+        return semesterEntityList;
+    }
 }
