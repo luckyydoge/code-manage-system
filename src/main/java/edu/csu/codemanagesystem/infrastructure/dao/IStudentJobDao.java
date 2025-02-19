@@ -12,4 +12,6 @@ public interface IStudentJobDao {
     List<Long> queryJobIdByStudentId(Long studentId);
 
     List<StudentJob> queryStudentJobByFactor(StudentJob req);
+
+    void updateStudentJob(StudentJob studentJob);
 }

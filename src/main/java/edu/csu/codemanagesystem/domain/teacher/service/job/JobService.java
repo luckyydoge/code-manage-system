@@ -8,10 +8,13 @@ import edu.csu.codemanagesystem.domain.teacher.repository.ITeacherRepository;
 import edu.csu.codemanagesystem.domain.teacher.service.IEmailService;
 import edu.csu.codemanagesystem.domain.teacher.service.IJobService;
 import edu.csu.codemanagesystem.infrastructure.po.Job;
+import edu.csu.codemanagesystem.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class JobService implements IJobService {
 
     private final ITeacherRepository teacherRepository;
     private final IEmailService emailService;
+    private final String uploadPath = System.getProperty("user.dir")  + "/uploads";
 
     public JobService(ITeacherRepository teacherRepository, IEmailService emailService) {
         this.teacherRepository = teacherRepository;
@@ -58,6 +62,22 @@ public class JobService implements IJobService {
         }
         List<JobEntity> jobEntityList = teacherRepository.queryJobByJobId(jobIdList);
         return jobEntityList;
+    }
+
+    @Override
+    public Boolean submitJob(MultipartFile file, StudentJobEntity studentJobEntity) {
+        studentJobEntity.setStatus("submitted");
+        teacherRepository.updateStudentJob(studentJobEntity);
+        Long currentTimeMillis = System.currentTimeMillis();
+        String filePath = uploadPath + "/" + studentJobEntity.getJobId() + "/" + studentJobEntity.getStudentId() + "/" +
+            file.getOriginalFilename() + "_" + currentTimeMillis;
+        try {
+            FileUtils.saveInputStreamToFile(file.getInputStream(), filePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
 }

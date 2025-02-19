@@ -345,7 +345,7 @@ CREATE TABLE `student_job` (
 
 LOCK TABLES `student_job` WRITE;
 /*!40000 ALTER TABLE `student_job` DISABLE KEYS */;
-INSERT INTO `student_job` VALUES (20,2,300003,'created'),(21,2,300004,'created'),(22,2,300005,'created'),(23,2,300006,'created'),(24,2,300007,'created');
+INSERT INTO `student_job` VALUES (20,2,300003,'submitted'),(21,2,300004,'created'),(22,2,300005,'created'),(23,2,300006,'created'),(24,2,300007,'created');
 /*!40000 ALTER TABLE `student_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,4 +411,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-19 17:43:18
+-- Dump completed on 2025-02-19 22:04:17

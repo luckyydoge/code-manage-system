@@ -227,5 +227,14 @@ public class TeacherRepository implements ITeacherRepository {
         });
         return classEntityList;
     }
+
+    @Override
+    public void updateStudentJob(StudentJobEntity studentJobEntity) {
+        StudentJob studentJob = new StudentJob();
+        studentJob.setJobId(studentJobEntity.getJobId());
+        studentJob.setStudentId(studentJobEntity.getStudentId());
+        studentJob.setStatus(studentJobEntity.getStatus());
+        studentJobDao.updateStudentJob(studentJob);
+    }
 }
 

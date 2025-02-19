@@ -8,6 +8,12 @@
                 (#{studentJob.jobId}, #{studentJob.studentId})
             </foreach>
     </insert>
+    <update id="updateStudentJob">
+        update student_job
+        set status = #{status}
+        where job_id = #{jobId}
+          and student_id = #{studentId}
+    </update>
     <select id="queryJobIdByStudentId" resultType="java.lang.Long">
         select job_id from student_job where student_id = #{studentId};
     </select>

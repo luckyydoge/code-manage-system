@@ -2,7 +2,9 @@ package edu.csu.codemanagesystem.domain.teacher.service;
 
 import edu.csu.codemanagesystem.domain.teacher.model.entity.JobEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.StudentJobEntity;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.List;
 
 public interface IJobService {
@@ -13,4 +15,8 @@ public interface IJobService {
     List<JobEntity> queryJobByStudentId(Long studentId);
 
     List<JobEntity> queryJobByStudentJobFactor(StudentJobEntity factor);
+
+//    Boolean submitJob(InputStream inputStream, StudentJobEntity studentJobEntity);
+
+    Boolean submitJob(MultipartFile file, StudentJobEntity studentJobEntity);
 }
