@@ -11,7 +11,6 @@ import edu.csu.codemanagesystem.infrastructure.po.Student;
 import edu.csu.codemanagesystem.infrastructure.po.StudentClass;
 import edu.csu.codemanagesystem.infrastructure.po.Teacher;
 import edu.csu.codemanagesystem.infrastructure.po.User;
-import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -93,7 +92,7 @@ public class ImportRepository implements IImportRepository {
         cacheList.forEach(studentEntity -> {
             User user = new User();
             user.setUserId(studentEntity.getStudentId());
-            user.setType("teacher");
+            user.setType("student");
             userList.add(user);
         });
 

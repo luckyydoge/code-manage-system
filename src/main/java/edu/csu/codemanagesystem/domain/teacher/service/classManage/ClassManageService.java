@@ -30,4 +30,10 @@ public class ClassManageService implements IClassManageService {
         log.info("queryClassByFactor factor:{}, classEntitiesList:{}", classEntityFactor, classEntitiesList);
         return classEntitiesList;
     }
+
+    @Override
+    public List<ClassEntity> queryClassByStudentId(Long studentId) {
+        List<ClassEntity> classEntitiesList = teacherRepository.queryClassBuStudentId(studentId);
+        return classEntitiesList;
+    }
 }

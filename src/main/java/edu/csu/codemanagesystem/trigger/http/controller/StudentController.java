@@ -2,8 +2,10 @@ package edu.csu.codemanagesystem.trigger.http.controller;
 
 import edu.csu.codemanagesystem.domain.import_excel.model.StudentEntity;
 import edu.csu.codemanagesystem.domain.student.IStudentService;
+import edu.csu.codemanagesystem.domain.teacher.model.entity.ClassEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.JobEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.StudentJobEntity;
+import edu.csu.codemanagesystem.domain.teacher.service.IClassManageService;
 import edu.csu.codemanagesystem.domain.teacher.service.IJobService;
 import edu.csu.codemanagesystem.type.Response;
 import edu.csu.codemanagesystem.type.ResponseCode;
@@ -23,6 +25,9 @@ public class StudentController {
     @Autowired
     IStudentService studentService;
 
+    @Autowired
+    IClassManageService classManageService;
+
     @PostMapping("/student/queryJobByStudentJobFactor")
     public Response<List<JobEntity>> queryJobByStudentJobFactor(@RequestBody StudentJobEntity factor) {
         List<JobEntity> jobEntityList = jobService.queryJobByStudentJobFactor(factor);
@@ -37,6 +42,16 @@ public class StudentController {
     public Response<List<StudentEntity>> queryStudentByFactor(@RequestBody StudentEntity factor) {
         List<StudentEntity> result = studentService.queryStudentByFactor(factor);
         return Response.<List<StudentEntity>>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(result)
+                .build();
+    }
+
+    @GetMapping("/api/queryClassByStudentId")
+    public Response<List<ClassEntity>> queryClassByStudentId(@RequestParam Long studentId) {
+        List<ClassEntity> result = classManageService.queryClassByStudentId(studentId);
+        return Response.<List<ClassEntity>>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
                 .data(result)

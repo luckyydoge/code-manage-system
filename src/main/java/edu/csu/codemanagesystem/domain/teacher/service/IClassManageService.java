@@ -8,4 +8,6 @@ public interface IClassManageService {
     Boolean createClass(ClassEntity classEntity);
 
     List<ClassEntity> queryClassByFactor(ClassEntity classEntityFactor);
+
+    List<ClassEntity> queryClassByStudentId(Long studentId);
 }

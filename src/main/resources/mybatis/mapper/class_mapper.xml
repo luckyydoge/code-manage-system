@@ -34,4 +34,11 @@
             and teacher_id = #{teacherId}
         </if>
     </select>
+    <select id="queryClassByClassIdList" resultType="edu.csu.codemanagesystem.infrastructure.po.ClassPO">
+        select id, class_id, name, people_count, semester_id, course_id, teacher_id from class
+        where class_id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

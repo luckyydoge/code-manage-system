@@ -13,5 +13,7 @@ public interface IClassDao {
 
     String queryCourseNameByCourseId(Long courseId);
 
-    List<ClassPO> queryClassByFactor();
+    List<ClassPO> queryClassByFactor(ClassPO factor);
+
+    List<ClassPO> queryClassByClassIdList(List<Long> classIdList);
 }

@@ -30,4 +30,6 @@ public interface ITeacherRepository {
     List<JobEntity> queryJobByJobId(List<Long> jobIdList);
 
     List<Long> queryJobIdByStudentJobFactor(StudentJobEntity factor);
+
+    List<ClassEntity> queryClassBuStudentId(Long studentId);
 }

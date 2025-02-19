@@ -6,10 +6,7 @@ import edu.csu.codemanagesystem.domain.teacher.model.entity.JobEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.StudentJobEntity;
 import edu.csu.codemanagesystem.domain.teacher.repository.ITeacherRepository;
 import edu.csu.codemanagesystem.infrastructure.dao.*;
-import edu.csu.codemanagesystem.infrastructure.po.ClassPO;
-import edu.csu.codemanagesystem.infrastructure.po.Job;
-import edu.csu.codemanagesystem.infrastructure.po.Student;
-import edu.csu.codemanagesystem.infrastructure.po.StudentJob;
+import edu.csu.codemanagesystem.infrastructure.po.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -121,7 +118,7 @@ public class TeacherRepository implements ITeacherRepository {
         classReq.setPeopleCount(classEntityFactor.getPeopleCount());
         classReq.setCourseId(classEntityFactor.getCourseId());
         classReq.setClassId(classEntityFactor.getClassId());
-        List<ClassPO> classPOList = classDao.queryClassByFactor();
+        List<ClassPO> classPOList = classDao.queryClassByFactor(classReq);
         List<ClassEntity> classEntityList = new ArrayList<>();
         classPOList.forEach(classPO -> {
             ClassEntity classEntity = ClassEntity.builder()
@@ -201,6 +198,34 @@ public class TeacherRepository implements ITeacherRepository {
         });
         return jobIdList;
 
+    }
+
+    @Override
+    public List<ClassEntity> queryClassBuStudentId(Long studentId) {
+        StudentClass req = new StudentClass();
+        req.setStudentId(studentId);
+        List<StudentClass> studentClassList = studentClassDao.queryByFactor(req);
+        if (studentClassList.isEmpty()) {
+            return List.of();
+        }
+        List<Long> classIdList = new ArrayList<>();
+        studentClassList.forEach(studentClass -> {
+            classIdList.add(studentClass.getClassId());
+        });
+        List<ClassPO> classPOList = classDao.queryClassByClassIdList(classIdList);
+        List<ClassEntity> classEntityList = new ArrayList<>();
+        classPOList.forEach(classPO -> {
+            ClassEntity classEntity = ClassEntity.builder()
+                    .classId(classPO.getClassId())
+                    .name(classPO.getName())
+                    .peopleCount(classPO.getPeopleCount())
+                    .semesterId(classPO.getSemesterId())
+                    .courseId(classPO.getCourseId())
+                    .teacherId(classPO.getTeacherId())
+                    .build();
+            classEntityList.add(classEntity);
+        });
+        return classEntityList;
     }
 }
 
