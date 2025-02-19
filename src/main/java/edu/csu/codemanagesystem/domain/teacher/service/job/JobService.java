@@ -53,6 +53,9 @@ public class JobService implements IJobService {
     @Override
     public List<JobEntity> queryJobByStudentJobFactor(StudentJobEntity factor) {
         List<Long> jobIdList = teacherRepository.queryJobIdByStudentJobFactor(factor);
+        if (jobIdList.isEmpty()) {
+            return List.of();
+        }
         List<JobEntity> jobEntityList = teacherRepository.queryJobByJobId(jobIdList);
         return jobEntityList;
     }
