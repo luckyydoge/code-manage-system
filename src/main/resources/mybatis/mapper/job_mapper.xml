@@ -10,7 +10,7 @@
         select count(*) from job;
     </select>
     <select id="queryJobByFactor" resultType="edu.csu.codemanagesystem.infrastructure.po.Job">
-        select id, job_id, title, content, course_id, class_id from job
+        select id, job_id, title, content, course_id, class_id, start_time, end_time, status from job
         where 1 = 1
         <if test="jobId != null and jobId != ''">
             and job_id = #{jobId}
