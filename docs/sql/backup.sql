@@ -345,7 +345,7 @@ CREATE TABLE `student_job` (
 
 LOCK TABLES `student_job` WRITE;
 /*!40000 ALTER TABLE `student_job` DISABLE KEYS */;
-INSERT INTO `student_job` VALUES (20,2,300003,'submitted'),(21,2,300004,'created'),(22,2,300005,'created'),(23,2,300006,'created'),(24,2,300007,'created');
+INSERT INTO `student_job` VALUES (20,2,300003,'submitted'),(21,2,300004,'submitted'),(22,2,300005,'created'),(23,2,300006,'created'),(24,2,300007,'created');
 /*!40000 ALTER TABLE `student_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,7 +389,7 @@ CREATE TABLE `users` (
   `password` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '123456' COMMENT '密码',
   `type` varchar(8) NOT NULL COMMENT '类型 student | admin | teacher',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户登录表';
+) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户登录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -398,7 +398,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,100001,'123456','admin'),(2,100002,'222','student'),(125,200032,'123456','teacher'),(126,300060,'123456','teacher'),(127,300061,'123456','teacher'),(128,300062,'123456','teacher'),(129,300063,'123456','teacher'),(130,300064,'123456','teacher'),(131,300007,'123456','teacher'),(132,300008,'123456','teacher'),(133,300009,'123456','teacher'),(134,300002,'123456','teacher'),(135,300003,'123456','teacher'),(136,300004,'123456','teacher'),(137,300004,'123456','teacher'),(138,300005,'123456','teacher'),(139,300006,'123456','teacher'),(140,300007,'123456','teacher'),(141,300008,'123456','teacher'),(142,300003,'123456','teacher'),(143,300004,'123456','teacher'),(144,300005,'123456','teacher'),(145,300006,'123456','teacher'),(146,300007,'123456','teacher');
+INSERT INTO `users` VALUES (1,100001,'123456','admin'),(2,100002,'222','student'),(125,200032,'123456','teacher'),(147,300004,'123456','student');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -411,4 +411,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-19 22:04:17
+-- Dump completed on 2025-02-19 23:21:11
