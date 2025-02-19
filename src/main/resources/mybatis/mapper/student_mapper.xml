@@ -31,7 +31,7 @@
             and name = #{name}
         </if>
         <if test="studentId != null and studentId != ''">
-            and studen_id = #{studentId}
+            and student_id = #{studentId}
         </if>
         <if test="sex != null and sex != ''">
             and sex = #{sex}

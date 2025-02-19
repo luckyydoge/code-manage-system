@@ -23,7 +23,7 @@ public class StudentController {
     @Autowired
     IStudentService studentService;
 
-    @GetMapping("/student/queryJobByStudentJobFactor")
+    @PostMapping("/student/queryJobByStudentJobFactor")
     public Response<List<JobEntity>> queryJobByStudentJobFactor(@RequestBody StudentJobEntity factor) {
         List<JobEntity> jobEntityList = jobService.queryJobByStudentJobFactor(factor);
         return Response.<List<JobEntity>>builder()
