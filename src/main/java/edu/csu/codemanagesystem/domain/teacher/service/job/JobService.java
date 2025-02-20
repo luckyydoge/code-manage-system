@@ -10,10 +10,12 @@ import edu.csu.codemanagesystem.domain.teacher.service.IJobService;
 import edu.csu.codemanagesystem.infrastructure.po.Job;
 import edu.csu.codemanagesystem.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.binary.Base16InputStream;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,11 +70,26 @@ public class JobService implements IJobService {
     public Boolean submitJob(MultipartFile file, StudentJobEntity studentJobEntity) {
         studentJobEntity.setStatus("submitted");
         teacherRepository.updateStudentJob(studentJobEntity);
-        Long currentTimeMillis = System.currentTimeMillis();
         String filePath = uploadPath + "/" + studentJobEntity.getJobId() + "/" + studentJobEntity.getStudentId() + "/" +
-            file.getOriginalFilename() + "_" + currentTimeMillis;
+            "job_file";
         try {
             FileUtils.saveInputStreamToFile(file.getInputStream(), filePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    @Override
+    public Boolean submitJob(String text, StudentJobEntity studentJobEntity) {
+        studentJobEntity.setStatus("submitted");
+        teacherRepository.updateStudentJob(studentJobEntity);
+        log.info("job text : {}", text);
+        String filePath = uploadPath + "/" + studentJobEntity.getJobId() + "/" + studentJobEntity.getStudentId() + "/" +
+                "job_file";
+        try {
+            FileUtils.saveInputStreamToFile(new ByteArrayInputStream(text.getBytes()), filePath);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -5,7 +5,7 @@ import edu.csu.codemanagesystem.domain.student.IStudentService;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.ClassEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.JobEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.StudentJobEntity;
-import edu.csu.codemanagesystem.domain.teacher.model.valobj.StudentJobSubmitVO;
+import edu.csu.codemanagesystem.domain.teacher.model.valobj.StudentJobSubmitTextVO;
 import edu.csu.codemanagesystem.domain.teacher.service.IClassManageService;
 import edu.csu.codemanagesystem.domain.teacher.service.IJobService;
 import edu.csu.codemanagesystem.type.Response;
@@ -62,11 +62,25 @@ public class StudentController {
 
     @PostMapping("/api/submitJob")
     public Response<Boolean> submitJob(@RequestParam MultipartFile file, @RequestParam Long studentId, @RequestParam Long jobId) {
-        Boolean result = jobService.submitJob(file, new StudentJobEntity((long)jobId,(long) studentId, "submitted"));
+        Boolean result = jobService.submitJob(file, new StudentJobEntity((long) jobId, (long) studentId, "submitted"));
         return Response.<Boolean>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
                 .data(result)
                 .build();
     }
+
+    @PostMapping("/api/submitJobText")
+    public Response<Boolean> submitJobText(@RequestBody StudentJobSubmitTextVO studentJobSubmitTextVO) {
+        Long studentId = studentJobSubmitTextVO.getStudentId();
+        Long jobId = studentJobSubmitTextVO.getJobId();
+        String text = studentJobSubmitTextVO.getJobText();
+        Boolean result = jobService.submitJob(text, new StudentJobEntity((long) jobId, (long) studentId, "submitted"));
+        return Response.<Boolean>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(result)
+                .build();
+    }
+
 }

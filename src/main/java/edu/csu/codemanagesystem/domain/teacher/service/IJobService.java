@@ -16,7 +16,7 @@ public interface IJobService {
 
     List<JobEntity> queryJobByStudentJobFactor(StudentJobEntity factor);
 
-//    Boolean submitJob(InputStream inputStream, StudentJobEntity studentJobEntity);
-
     Boolean submitJob(MultipartFile file, StudentJobEntity studentJobEntity);
+
+    Boolean submitJob(String text, StudentJobEntity studentJobEntity);
 }
