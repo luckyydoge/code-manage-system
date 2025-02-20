@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.csu.codemanagesystem.infrastructure.dao.IStudentJobDao">
     <insert id="insertStudentJobBatch" parameterType="java.util.List">
-        insert into student_job (job_id, student_id)
+        insert into student_job (job_id, student_id, name)
             values
             <foreach collection="list" item="studentJob" separator=",">
-                (#{studentJob.jobId}, #{studentJob.studentId})
+                (#{studentJob.jobId}, #{studentJob.studentId}, #{studentJob.name})
             </foreach>
     </insert>
     <update id="updateStudentJob">
@@ -18,7 +18,7 @@
         select job_id from student_job where student_id = #{studentId};
     </select>
     <select id="queryStudentJobByFactor" resultType="edu.csu.codemanagesystem.infrastructure.po.StudentJob">
-        select id, job_id, student_id, status from student_job
+        select id, job_id, student_id, status, name from student_job
         where 1 = 1
         <if test="jobId != null and jobId != ''">
             and job_id = #{jobId}
@@ -28,6 +28,9 @@
         </if>
         <if test="status != null and status != ''">
             and status = #{status}
+        </if>
+        <if test="name != null and name != ''">
+            and name = #{name}
         </if>
     </select>
 </mapper>

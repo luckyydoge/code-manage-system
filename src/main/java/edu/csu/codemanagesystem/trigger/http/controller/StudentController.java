@@ -62,7 +62,7 @@ public class StudentController {
 
     @PostMapping("/api/submitJob")
     public Response<Boolean> submitJob(@RequestParam MultipartFile file, @RequestParam Long studentId, @RequestParam Long jobId) {
-        Boolean result = jobService.submitJob(file, new StudentJobEntity((long) jobId, (long) studentId, "submitted"));
+        Boolean result = jobService.submitJob(file, new StudentJobEntity((long) jobId, (long) studentId, "", "submitted"));
         return Response.<Boolean>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
@@ -75,7 +75,7 @@ public class StudentController {
         Long studentId = studentJobSubmitTextVO.getStudentId();
         Long jobId = studentJobSubmitTextVO.getJobId();
         String text = studentJobSubmitTextVO.getJobText();
-        Boolean result = jobService.submitJob(text, new StudentJobEntity((long) jobId, (long) studentId, "submitted"));
+        Boolean result = jobService.submitJob(text, new StudentJobEntity((long) jobId, (long) studentId, "", "submitted"));
         return Response.<Boolean>builder()
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())

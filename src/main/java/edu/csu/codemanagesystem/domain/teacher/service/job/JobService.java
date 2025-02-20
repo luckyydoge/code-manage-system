@@ -99,4 +99,11 @@ public class JobService implements IJobService {
         return true;
     }
 
+    @Override
+    public String queryJobFilePathByStudentIdAndJobId(Long studentId, Long jobId) {
+        StudentEntity studentEntity = teacherRepository.queryStudentByFactor(StudentEntity.builder().studentId(studentId).build()).get(0);
+        String name = studentEntity.getName();
+        return uploadPath + "/" + jobId + "/" + studentId + "/" + name;
+    }
+
 }

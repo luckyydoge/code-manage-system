@@ -17,7 +17,6 @@ public interface ITeacherRepository {
 
     void insertJobIntoJobTable(JobEntity jobEntity);
 
-    void insertStudentJob(Long jobId, List<Long> studentIdList);
 
     void insertJobAndStudentIntoDatabase(JobEntity jobEntity, List<StudentEntity> studentEntityList);
 
@@ -38,4 +37,6 @@ public interface ITeacherRepository {
     List<StudentEntity> queryStudentByFactor(StudentEntity studentEntityBuilder);
 
     TeacherEntity queryTeacherByClassId(Long classId);
+
+    void insertStudentJob(Long jobId, List<StudentEntity> studentEntityList);
 }

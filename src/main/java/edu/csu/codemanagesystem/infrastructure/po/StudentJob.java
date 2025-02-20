@@ -7,5 +7,6 @@ public class StudentJob {
     private Long id;
     private Long jobId;
     private Long studentId;
+    private String name;
     private String status;
 }

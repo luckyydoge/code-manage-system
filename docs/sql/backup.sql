@@ -331,6 +331,7 @@ CREATE TABLE `student_job` (
   `job_id` int NOT NULL COMMENT '作业id',
   `student_id` int NOT NULL COMMENT '学生id',
   `status` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'created' COMMENT '状态 created | submitted | stop',
+  `name` varchar(32) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `job_id` (`job_id`),
   KEY `student_id` (`student_id`),
@@ -345,7 +346,7 @@ CREATE TABLE `student_job` (
 
 LOCK TABLES `student_job` WRITE;
 /*!40000 ALTER TABLE `student_job` DISABLE KEYS */;
-INSERT INTO `student_job` VALUES (20,2,300003,'submitted'),(21,2,300004,'submitted'),(22,2,300005,'submitted'),(23,2,300006,'created'),(24,2,300007,'created');
+INSERT INTO `student_job` VALUES (20,2,300003,'submitted','钟俊威'),(21,2,300004,'submitted','张俊琛'),(22,2,300005,'submitted','马宏琨'),(23,2,300006,'created','胡展鸣'),(24,2,300007,'created','王豪毅');
 /*!40000 ALTER TABLE `student_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,4 +412,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-21  0:57:36
+-- Dump completed on 2025-02-21  1:44:50

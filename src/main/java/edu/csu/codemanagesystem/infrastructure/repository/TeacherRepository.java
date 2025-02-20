@@ -93,12 +93,13 @@ public class TeacherRepository implements ITeacherRepository {
     }
 
     @Override
-    public void insertStudentJob(Long jobId, List<Long> studentIdList) {
+    public void insertStudentJob(Long jobId, List<StudentEntity> studentEntityList) {
         List<StudentJob> studentJobList = new ArrayList<>();
-        studentIdList.forEach(studentId -> {
+        studentEntityList.forEach(student -> {
             StudentJob studentJob = new StudentJob();
             studentJob.setJobId(jobId);
-            studentJob.setStudentId(studentId);
+            studentJob.setStudentId(studentJob.getStudentId());
+            studentJob.setName(student.getName());
             studentJobList.add(studentJob);
         });
         studentJobDao.insertStudentJobBatch(studentJobList);
@@ -109,14 +110,10 @@ public class TeacherRepository implements ITeacherRepository {
     @Transactional
     public void insertJobAndStudentIntoDatabase(JobEntity jobEntity, List<StudentEntity> studentEntityList) {
         this.insertJobIntoJobTable(jobEntity);
-        List<Long> studentIdList = new ArrayList<>();
-        studentEntityList.forEach(studentEntity -> {
-            studentIdList.add(studentEntity.getStudentId());
-        });
         if (studentEntityList.isEmpty()) {
             return;
         }
-        this.insertStudentJob(jobEntity.getJobId(), studentIdList);
+        this.insertStudentJob(jobEntity.getJobId(), studentEntityList);
     }
 
     @Override

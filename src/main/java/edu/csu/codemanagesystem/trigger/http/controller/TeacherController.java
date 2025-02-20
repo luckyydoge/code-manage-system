@@ -9,15 +9,20 @@ import edu.csu.codemanagesystem.domain.teacher.service.IClassManageService;
 import edu.csu.codemanagesystem.domain.teacher.service.IJobService;
 import edu.csu.codemanagesystem.type.Response;
 import edu.csu.codemanagesystem.type.ResponseCode;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -80,6 +85,25 @@ public class TeacherController {
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
                 .data(jobEntityList).build();
+    }
+
+    @GetMapping("/api/queryJobFileByStudentIdAndJobId")
+    public void queryJobFileByStudentIdAndJobId(@RequestParam Long studentId, @RequestParam Long jobId, HttpServletResponse response) {
+        String filePath = jobService.queryJobFilePathByStudentIdAndJobId(studentId, jobId);
+        if (filePath == null) {
+            return;
+        }
+        Path filepath = Paths.get(filePath);
+        try {
+            Resource resource = new UrlResource(filepath.toUri());
+            if (resource.exists() && resource.isReadable()) {
+                try (InputStream inputStream = resource.getInputStream()) {
+                    FileCopyUtils.copy(inputStream, response.getOutputStream());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private Response<String> returnStringResponseByBoolean(Boolean success) {

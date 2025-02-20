@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class StudentJobEntity {
     private Long jobId;
     private Long studentId;
+    private String name;
     private String status;
 }

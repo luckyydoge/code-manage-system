@@ -60,6 +60,7 @@ public class StudentRepository implements IStudentRepository {
             StudentJobEntity studentJobEntity = StudentJobEntity.builder()
                     .jobId(studentJob.getJobId())
                     .studentId(studentJob.getStudentId())
+                    .name(studentJob.getName())
                     .status(studentJob.getStatus())
                     .build();
             studentJobEntityList.add(studentJobEntity);

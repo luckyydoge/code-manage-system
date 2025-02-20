@@ -19,4 +19,6 @@ public interface IJobService {
     Boolean submitJob(MultipartFile file, StudentJobEntity studentJobEntity);
 
     Boolean submitJob(String text, StudentJobEntity studentJobEntity);
+
+    String queryJobFilePathByStudentIdAndJobId(Long studentId, Long jobId);
 }
