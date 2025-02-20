@@ -14,4 +14,6 @@ public interface IJobDao {
     List<Job> queryJobByFactor(Job jobReq);
 
     List<Job> queryJobByJobId(List<Long> jobIdList);
+
+    void updateJobStatus(Job job);
 }

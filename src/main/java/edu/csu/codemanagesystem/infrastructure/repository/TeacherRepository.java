@@ -107,6 +107,14 @@ public class TeacherRepository implements ITeacherRepository {
     }
 
     @Override
+    public void updateJobById(JobEntity jobEntity) {
+        Job job = new Job();
+        job.setJobId(jobEntity.getJobId());
+        job.setStatus(jobEntity.getStatus());
+        jobDao.updateJobStatus(job);
+    }
+
+    @Override
     @Transactional
     public void insertJobAndStudentIntoDatabase(JobEntity jobEntity, List<StudentEntity> studentEntityList) {
         this.insertJobIntoJobTable(jobEntity);

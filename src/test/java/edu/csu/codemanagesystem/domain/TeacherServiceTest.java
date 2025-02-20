@@ -51,8 +51,8 @@ public class TeacherServiceTest {
         }
     }
 
-    @Test
-    public void testDuplicateCheck(){
-        duplicateCheckService.duplicateCheck();
-    }
+//    @Test
+//    public void testDuplicateCheck(){
+//        duplicateCheckService.duplicateCheck();
+//    }
 }

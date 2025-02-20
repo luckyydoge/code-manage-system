@@ -95,6 +95,8 @@ public class DuplicateCheckService implements IDuplicateCheckService {
                 TeacherEntity teacherEntity = teacherRepository.queryTeacherByClassId(jobEntity.getClassId());
                 String email = teacherEntity.getEmail();
                 emailService.sendDuplicateCheckEmail(duplicateCheckResList, email);
+                jobEntity.setStatus("stopped");
+                teacherRepository.updateJobById(jobEntity);
             }
         });
 

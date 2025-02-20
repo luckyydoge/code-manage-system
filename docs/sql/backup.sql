@@ -197,7 +197,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
-INSERT INTO `job` VALUES (1,1,'test','test',1001,400001,'submitted','2024-09-01 00:00:00','2025-09-01 00:00:00'),(5,2,'高数第一次作业','完成第一章试卷',1002,400002,'created','2025-02-18 06:53:44','2025-02-18 06:53:44');
+INSERT INTO `job` VALUES (1,1,'test','test',1001,400001,'stopped','2024-09-01 00:00:00','2025-09-01 00:00:00'),(5,2,'高数第一次作业','完成第一章试卷',1002,400002,'stopped','2025-02-18 06:53:44','2025-02-18 06:53:44');
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,7 +364,7 @@ CREATE TABLE `teacher` (
   `email` varchar(32) NOT NULL COMMENT '电子邮箱地址',
   PRIMARY KEY (`id`),
   UNIQUE KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='教师表';
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='教师表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -373,7 +373,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1,200001,'abc',''),(2,200002,'abd','2647461091@qq.com'),(3,200003,'苏明宇','sumingyu@qq.com'),(34,200004,'赵悦','zhaoyue@qq.com'),(35,200005,'江南','jiangnan@qq.com'),(36,200006,'陈逸飞','chenyifei@qq.com'),(37,200007,'周星','zhouxing@qq.com'),(38,200008,'王思瑶','wangsiyao@qq.com'),(39,200009,'李梦琪','limengqi@qq.com'),(40,200010,'张逸尘','zhangyichen@qq.com'),(41,200011,'刘宇辰','liuyuchen@qq.com'),(42,200012,'吴星宇','wuxingyu@qq.com'),(43,200013,'赵悦琳','zhaoyuelin@qq.com'),(44,200014,'钱逸风','qianyifeng@qq.com'),(45,200015,'孙悦','sunyue@qq.com'),(46,200016,'李思远','lisiyuan@qq.com'),(47,200017,'周逸飞','zhouyifei@qq.com'),(48,200018,'吴宇航','wuyuhang@qq.com'),(49,200019,'陈悦瑶','chenyueyao@qq.com'),(50,200020,'王梦琪','wangmengqi@qq.com'),(51,200021,'赵思远','zhaosiyuan@qq.com'),(52,200022,'欧阳逸飞','ouyangyifei@qq.com'),(53,200023,'陆星瑶','luxingyao@qq.com'),(54,200024,'秦逸轩','qinyixuan@qq.com'),(55,200025,'江逸飞','jiangyifei@qq.com'),(56,200026,'范思远','fansiyuan@qq.com'),(57,200027,'郭梦琪','guomengqi@qq.com'),(58,200028,'雷宇辰','leiyuchen@qq.com'),(59,200029,'钟悦琳','zhongyuelin@qq.com'),(60,200030,'龙逸风','longyifeng@qq.com'),(61,200031,'伍星宇','wuxingyu@qq.com'),(62,200032,'test','test@qq.com');
+INSERT INTO `teacher` VALUES (1,200001,'abc',''),(2,200002,'abd','2647461091@qq.com'),(3,200003,'苏明宇','sumingyu@qq.com'),(34,200004,'赵悦','zhaoyue@qq.com'),(35,200005,'江南','jiangnan@qq.com'),(36,200006,'陈逸飞','chenyifei@qq.com'),(37,200007,'周星','zhouxing@qq.com'),(38,200008,'王思瑶','wangsiyao@qq.com'),(39,200009,'李梦琪','limengqi@qq.com'),(40,200010,'张逸尘','zhangyichen@qq.com'),(41,200011,'刘宇辰','liuyuchen@qq.com'),(42,200012,'吴星宇','wuxingyu@qq.com'),(43,200013,'赵悦琳','zhaoyuelin@qq.com'),(44,200014,'钱逸风','qianyifeng@qq.com'),(45,200015,'孙悦','sunyue@qq.com'),(46,200016,'李思远','lisiyuan@qq.com'),(47,200017,'周逸飞','zhouyifei@qq.com'),(48,200018,'吴宇航','wuyuhang@qq.com'),(49,200019,'陈悦瑶','chenyueyao@qq.com'),(50,200020,'王梦琪','wangmengqi@qq.com'),(51,200021,'赵思远','zhaosiyuan@qq.com'),(52,200022,'欧阳逸飞','ouyangyifei@qq.com'),(53,200023,'陆星瑶','luxingyao@qq.com'),(54,200024,'秦逸轩','qinyixuan@qq.com'),(55,200025,'江逸飞','jiangyifei@qq.com'),(56,200026,'范思远','fansiyuan@qq.com'),(57,200027,'郭梦琪','guomengqi@qq.com'),(58,200028,'雷宇辰','leiyuchen@qq.com'),(59,200029,'钟悦琳','zhongyuelin@qq.com'),(60,200030,'龙逸风','longyifeng@qq.com'),(61,200031,'伍星宇','wuxingyu@qq.com'),(62,200032,'test','test@qq.com'),(69,200033,'test','test@qq.com'),(70,200034,'test','test@qq.com'),(71,200035,'test','test@qq.com'),(72,200036,'test','test@qq.com'),(73,200037,'test','test@qq.com');
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,7 +390,7 @@ CREATE TABLE `users` (
   `password` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '123456' COMMENT '密码',
   `type` varchar(8) NOT NULL COMMENT '类型 student | admin | teacher',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户登录表';
+) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户登录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -399,7 +399,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,100001,'123456','admin'),(2,100002,'222','student'),(125,200032,'123456','teacher'),(147,300004,'123456','student');
+INSERT INTO `users` VALUES (1,100001,'123456','admin'),(2,100002,'222','student'),(125,200032,'123456','teacher'),(147,300004,'123456','student'),(148,200033,'123456','teacher'),(149,1,'123456','teacher'),(150,1,'123456','teacher'),(151,200034,'123456','teacher'),(152,1,'123456','teacher'),(153,1,'123456','teacher'),(154,200035,'123456','teacher'),(155,1,'123456','teacher'),(156,1,'123456','teacher'),(157,200036,'123456','teacher'),(158,1,'123456','teacher'),(159,1,'123456','teacher'),(160,200037,'123456','teacher'),(161,1,'123456','teacher'),(162,1,'123456','teacher');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -412,4 +412,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-21  1:44:50
+-- Dump completed on 2025-02-21  2:07:36

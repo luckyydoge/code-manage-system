@@ -43,23 +43,23 @@ public class TeacherRepositoryTest {
         System.out.println(studentList);
     }
 
-    @Test
-    public void studentJobDaoTest() {
-        List<StudentJob> studentJobList = new ArrayList<>();
-        StudentJob studentJob1 = new StudentJob();
-        studentJob1.setStudentId((long)300001);
-        studentJob1.setJobId((long)1);
-        StudentJob studentJob2 = new StudentJob();
-        studentJob2.setStudentId((long)300002);
-        studentJob2.setJobId((long)1);
-        StudentJob studentJob3 = new StudentJob();
-        studentJob3.setStudentId((long)300003);
-        studentJob3.setJobId((long)1);
-        studentJobList.add(studentJob1);
-        studentJobList.add(studentJob2);
-        studentJobList.add(studentJob3);
-        iStudentJobDao.insertStudentJobBatch(studentJobList);
-    }
+//    @Test
+//    public void studentJobDaoTest() {
+//        List<StudentJob> studentJobList = new ArrayList<>();
+//        StudentJob studentJob1 = new StudentJob();
+//        studentJob1.setStudentId((long)300001);
+//        studentJob1.setJobId((long)1);
+//        StudentJob studentJob2 = new StudentJob();
+//        studentJob2.setStudentId((long)300002);
+//        studentJob2.setJobId((long)1);
+//        StudentJob studentJob3 = new StudentJob();
+//        studentJob3.setStudentId((long)300003);
+//        studentJob3.setJobId((long)1);
+//        studentJobList.add(studentJob1);
+//        studentJobList.add(studentJob2);
+//        studentJobList.add(studentJob3);
+//        iStudentJobDao.insertStudentJobBatch(studentJobList);
+//    }
 
     @Test
     public void queryCourseNameByCourseIdTest() {

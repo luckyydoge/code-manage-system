@@ -6,6 +6,11 @@
             values
                 (#{jobId}, #{title}, #{content}, #{courseId}, #{classId}, #{startTime}, #{endTime})
     </insert>
+    <update id="updateJobStatus">
+        update job
+            set status = #{status}
+        where job_id = #{jobId}
+    </update>
     <select id="queryJobCount" resultType="java.lang.Integer">
         select count(*) from job;
     </select>

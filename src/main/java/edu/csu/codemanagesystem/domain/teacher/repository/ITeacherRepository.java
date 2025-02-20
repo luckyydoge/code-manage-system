@@ -39,4 +39,6 @@ public interface ITeacherRepository {
     TeacherEntity queryTeacherByClassId(Long classId);
 
     void insertStudentJob(Long jobId, List<StudentEntity> studentEntityList);
+
+    void updateJobById(JobEntity jobEntity);
 }
