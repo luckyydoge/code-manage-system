@@ -1,10 +1,10 @@
 package edu.csu.codemanagesystem.domain.teacher.repository;
 
 import edu.csu.codemanagesystem.domain.import_excel.model.StudentEntity;
+import edu.csu.codemanagesystem.domain.import_excel.model.TeacherEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.ClassEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.JobEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.StudentJobEntity;
-import edu.csu.codemanagesystem.infrastructure.po.Job;
 
 import java.util.List;
 
@@ -34,4 +34,8 @@ public interface ITeacherRepository {
     List<ClassEntity> queryClassBuStudentId(Long studentId);
 
     void updateStudentJob(StudentJobEntity studentJobEntity);
+
+    List<StudentEntity> queryStudentByFactor(StudentEntity studentEntityBuilder);
+
+    TeacherEntity queryTeacherByClassId(Long classId);
 }

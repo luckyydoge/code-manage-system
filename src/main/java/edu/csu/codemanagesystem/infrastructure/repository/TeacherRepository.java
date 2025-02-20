@@ -1,6 +1,7 @@
 package edu.csu.codemanagesystem.infrastructure.repository;
 
 import edu.csu.codemanagesystem.domain.import_excel.model.StudentEntity;
+import edu.csu.codemanagesystem.domain.import_excel.model.TeacherEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.ClassEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.JobEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.StudentJobEntity;
@@ -32,6 +33,9 @@ public class TeacherRepository implements ITeacherRepository {
     @Autowired
     IStudentDao studentDao;
 
+    @Autowired
+    ITeacherDao teacherDao;
+
     @Override
     public void createClass(ClassEntity classEntity) {
         long count = classDao.queryClassCount();
@@ -48,6 +52,9 @@ public class TeacherRepository implements ITeacherRepository {
     @Override
     public List<StudentEntity> queryStudentByClassId(Long classId) {
         List<Long> studentIdList = studentClassDao.queryStudentIdByClassId(classId);
+        if (studentIdList.isEmpty()) {
+            return List.of();
+        }
         List<Student> studentList = studentDao.queryStudentByStudentIdList(studentIdList);
         List<StudentEntity> studentEntityList = new ArrayList<>();
         studentList.forEach(student -> {
@@ -106,6 +113,9 @@ public class TeacherRepository implements ITeacherRepository {
         studentEntityList.forEach(studentEntity -> {
             studentIdList.add(studentEntity.getStudentId());
         });
+        if (studentEntityList.isEmpty()) {
+            return;
+        }
         this.insertStudentJob(jobEntity.getJobId(), studentIdList);
     }
 
@@ -154,6 +164,7 @@ public class TeacherRepository implements ITeacherRepository {
                     .courseId(job.getCourseId())
                     .classId(job.getClassId())
                     .startTime(job.getStartTime())
+                    .status(job.getStatus())
                     .endTime(job.getEndTime())
                     .build();
             jobEntityList.add(jobEntity);
@@ -235,6 +246,44 @@ public class TeacherRepository implements ITeacherRepository {
         studentJob.setStudentId(studentJobEntity.getStudentId());
         studentJob.setStatus(studentJobEntity.getStatus());
         studentJobDao.updateStudentJob(studentJob);
+    }
+
+    @Override
+    public List<StudentEntity> queryStudentByFactor(StudentEntity factor) {
+        Student req = new Student();
+        req.setStudentId(factor.getStudentId());
+        req.setName(factor.getName());
+        req.setEmail(factor.getEmail());
+        req.setSex(factor.getSex());
+        req.setPhoneNumber(factor.getPhoneNumber());
+        req.setEmail(factor.getEmail());
+         req.setAdministrativeClass(factor.getAdministrativeClass());
+        List<Student> studentList = studentDao.queryStudentByFactor(req);
+        List<StudentEntity> studentEntityList = new ArrayList<>();
+        studentList.forEach(student-> {
+            StudentEntity studentEntity = StudentEntity.builder()
+                    .phoneNumber(student.getPhoneNumber())
+                    .administrativeClass(student.getAdministrativeClass())
+                    .sex(student.getSex())
+                    .studentId(student.getStudentId())
+                    .name(student.getName())
+                    .email(student.getEmail())
+                    .build();
+            studentEntityList.add(studentEntity);
+        });
+        return studentEntityList;
+    }
+
+    @Override
+    public TeacherEntity queryTeacherByClassId(Long classId) {
+        ClassPO  classPO = classDao.queryClassByClassIdList(List.of(classId)).get(0);
+        Teacher teacher = teacherDao.queryTeacherById(classPO.getTeacherId());
+        return TeacherEntity.builder()
+                .name(teacher.getName())
+                .email(teacher.getEmail())
+                .teacherId(teacher.getTeacherId())
+                .build();
+
     }
 }
 

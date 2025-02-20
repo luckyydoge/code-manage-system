@@ -19,6 +19,10 @@ spring:
 #      schema-locations: classpath:/org/springframework/session/jdbc/schema-@@platform@@.sql
 #      file: ./docker/compose.yaml
 
+python-service:
+  url: http://localhost
+  port: 8088
+
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
   configuration:

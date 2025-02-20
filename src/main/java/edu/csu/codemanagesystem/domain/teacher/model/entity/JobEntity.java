@@ -16,6 +16,7 @@ public class JobEntity {
     private Long jobId;
     private String title;
     private String content;
+    private String status;
     private Long courseId;
     private Long classId;
     private Date startTime;

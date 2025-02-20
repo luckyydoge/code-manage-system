@@ -6,6 +6,7 @@ import com.aliyun.dm20151123.models.SingleSendMailResponse;
 import com.aliyun.teaopenapi.models.Config;
 import edu.csu.codemanagesystem.domain.import_excel.model.StudentEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.JobEntity;
+import edu.csu.codemanagesystem.domain.teacher.model.valobj.DuplicateCheckRes;
 import edu.csu.codemanagesystem.domain.teacher.service.IEmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -59,5 +60,31 @@ public class EmailService implements IEmailService {
                 throw new RuntimeException(e);
             }
         }));
+    }
+
+    @Override
+    public void sendDuplicateCheckEmail(List<DuplicateCheckRes> duplicateCheckResList, String email) {
+        log.info("send duplicate check email to {}", email);
+        SingleSendMailRequest singleSendMailRequest = new SingleSendMailRequest()
+                .setAccountName("zjc@code.manage.system.rabbit-dog.xyz")
+                .setAddressType(1)
+                .setReplyToAddress(true)
+                .setSubject("查重结果");
+        singleSendMailRequest.setToAddress(email);
+        StringBuilder stringBuilder = new StringBuilder();
+        duplicateCheckResList.forEach(duplicateCheckRes -> {
+            stringBuilder.append(duplicateCheckRes.getStudent1()).append("  ").append(duplicateCheckRes.getStudent2())
+                    .append("  ").append("查重率为:").append(duplicateCheckRes.getRate()).append("\n");
+        });
+        String textBody = stringBuilder.toString();
+        singleSendMailRequest.setTextBody(textBody);
+        log.info("test : {}", textBody);
+        try {
+            SingleSendMailResponse response = dmClient.singleSendMail(singleSendMailRequest);
+            log.info("send response : {} ", response.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 }

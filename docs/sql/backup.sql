@@ -179,7 +179,7 @@ CREATE TABLE `job` (
   `content` varchar(256) DEFAULT NULL COMMENT '内容',
   `course_id` int NOT NULL COMMENT '课程id',
   `class_id` int NOT NULL COMMENT '教学班级id',
-  `status` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'enable' COMMENT '状态 enable | disable',
+  `status` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'created' COMMENT '状态 created | stopped',
   `start_time` datetime NOT NULL COMMENT '开始时间',
   `end_time` datetime NOT NULL COMMENT '结束时间',
   PRIMARY KEY (`id`),
@@ -197,7 +197,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
-INSERT INTO `job` VALUES (1,1,'test','test',1001,400001,'created','2024-09-01 00:00:00','2025-09-01 00:00:00'),(5,2,'高数第一次作业','完成第一章试卷',1002,400002,'enable','2025-02-18 06:53:44','2025-03-18 06:53:44');
+INSERT INTO `job` VALUES (1,1,'test','test',1001,400001,'submitted','2024-09-01 00:00:00','2025-09-01 00:00:00'),(5,2,'高数第一次作业','完成第一章试卷',1002,400002,'created','2025-02-18 06:53:44','2025-02-18 06:53:44');
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,7 +372,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1,200001,'abc',''),(2,200002,'abd',''),(3,200003,'苏明宇','sumingyu@qq.com'),(34,200004,'赵悦','zhaoyue@qq.com'),(35,200005,'江南','jiangnan@qq.com'),(36,200006,'陈逸飞','chenyifei@qq.com'),(37,200007,'周星','zhouxing@qq.com'),(38,200008,'王思瑶','wangsiyao@qq.com'),(39,200009,'李梦琪','limengqi@qq.com'),(40,200010,'张逸尘','zhangyichen@qq.com'),(41,200011,'刘宇辰','liuyuchen@qq.com'),(42,200012,'吴星宇','wuxingyu@qq.com'),(43,200013,'赵悦琳','zhaoyuelin@qq.com'),(44,200014,'钱逸风','qianyifeng@qq.com'),(45,200015,'孙悦','sunyue@qq.com'),(46,200016,'李思远','lisiyuan@qq.com'),(47,200017,'周逸飞','zhouyifei@qq.com'),(48,200018,'吴宇航','wuyuhang@qq.com'),(49,200019,'陈悦瑶','chenyueyao@qq.com'),(50,200020,'王梦琪','wangmengqi@qq.com'),(51,200021,'赵思远','zhaosiyuan@qq.com'),(52,200022,'欧阳逸飞','ouyangyifei@qq.com'),(53,200023,'陆星瑶','luxingyao@qq.com'),(54,200024,'秦逸轩','qinyixuan@qq.com'),(55,200025,'江逸飞','jiangyifei@qq.com'),(56,200026,'范思远','fansiyuan@qq.com'),(57,200027,'郭梦琪','guomengqi@qq.com'),(58,200028,'雷宇辰','leiyuchen@qq.com'),(59,200029,'钟悦琳','zhongyuelin@qq.com'),(60,200030,'龙逸风','longyifeng@qq.com'),(61,200031,'伍星宇','wuxingyu@qq.com'),(62,200032,'test','test@qq.com');
+INSERT INTO `teacher` VALUES (1,200001,'abc',''),(2,200002,'abd','2647461091@qq.com'),(3,200003,'苏明宇','sumingyu@qq.com'),(34,200004,'赵悦','zhaoyue@qq.com'),(35,200005,'江南','jiangnan@qq.com'),(36,200006,'陈逸飞','chenyifei@qq.com'),(37,200007,'周星','zhouxing@qq.com'),(38,200008,'王思瑶','wangsiyao@qq.com'),(39,200009,'李梦琪','limengqi@qq.com'),(40,200010,'张逸尘','zhangyichen@qq.com'),(41,200011,'刘宇辰','liuyuchen@qq.com'),(42,200012,'吴星宇','wuxingyu@qq.com'),(43,200013,'赵悦琳','zhaoyuelin@qq.com'),(44,200014,'钱逸风','qianyifeng@qq.com'),(45,200015,'孙悦','sunyue@qq.com'),(46,200016,'李思远','lisiyuan@qq.com'),(47,200017,'周逸飞','zhouyifei@qq.com'),(48,200018,'吴宇航','wuyuhang@qq.com'),(49,200019,'陈悦瑶','chenyueyao@qq.com'),(50,200020,'王梦琪','wangmengqi@qq.com'),(51,200021,'赵思远','zhaosiyuan@qq.com'),(52,200022,'欧阳逸飞','ouyangyifei@qq.com'),(53,200023,'陆星瑶','luxingyao@qq.com'),(54,200024,'秦逸轩','qinyixuan@qq.com'),(55,200025,'江逸飞','jiangyifei@qq.com'),(56,200026,'范思远','fansiyuan@qq.com'),(57,200027,'郭梦琪','guomengqi@qq.com'),(58,200028,'雷宇辰','leiyuchen@qq.com'),(59,200029,'钟悦琳','zhongyuelin@qq.com'),(60,200030,'龙逸风','longyifeng@qq.com'),(61,200031,'伍星宇','wuxingyu@qq.com'),(62,200032,'test','test@qq.com');
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,4 +411,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-20 13:30:52
+-- Dump completed on 2025-02-21  0:57:36

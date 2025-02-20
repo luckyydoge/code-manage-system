@@ -70,8 +70,9 @@ public class JobService implements IJobService {
     public Boolean submitJob(MultipartFile file, StudentJobEntity studentJobEntity) {
         studentJobEntity.setStatus("submitted");
         teacherRepository.updateStudentJob(studentJobEntity);
+        String name = teacherRepository.queryStudentByFactor(StudentEntity.builder().studentId(studentJobEntity.getStudentId()).build()).get(0).getName();
         String filePath = uploadPath + "/" + studentJobEntity.getJobId() + "/" + studentJobEntity.getStudentId() + "/" +
-            "job_file";
+            name;
         try {
             FileUtils.saveInputStreamToFile(file.getInputStream(), filePath);
         } catch (Exception e) {
@@ -86,8 +87,9 @@ public class JobService implements IJobService {
         studentJobEntity.setStatus("submitted");
         teacherRepository.updateStudentJob(studentJobEntity);
         log.info("job text : {}", text);
+        String name = teacherRepository.queryStudentByFactor(StudentEntity.builder().studentId(studentJobEntity.getStudentId()).build()).get(0).getName();
         String filePath = uploadPath + "/" + studentJobEntity.getJobId() + "/" + studentJobEntity.getStudentId() + "/" +
-                "job_file";
+                name;
         try {
             FileUtils.saveInputStreamToFile(new ByteArrayInputStream(text.getBytes()), filePath);
         } catch (Exception e) {
