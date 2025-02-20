@@ -1,7 +1,7 @@
 package edu.csu.codemanagesystem.trigger.http.controller;
 
 import edu.csu.codemanagesystem.domain.import_excel.model.StudentEntity;
-import edu.csu.codemanagesystem.domain.student.IStudentService;
+import edu.csu.codemanagesystem.domain.student.service.IStudentService;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.ClassEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.JobEntity;
 import edu.csu.codemanagesystem.domain.teacher.model.entity.StudentJobEntity;
@@ -80,6 +80,16 @@ public class StudentController {
                 .code(ResponseCode.SUCCESS.getCode())
                 .info(ResponseCode.SUCCESS.getInfo())
                 .data(result)
+                .build();
+    }
+
+    @PostMapping("/api/queryStudentJobByFactor")
+    public Response<List<StudentJobEntity>> queryStudentJobByFactor(@RequestBody StudentJobEntity factor) {
+        List<StudentJobEntity> studentJobEntityList = studentService.queryStudentJobByFactor(factor);
+        return Response.<List<StudentJobEntity>>builder()
+                .code(ResponseCode.SUCCESS.getCode())
+                .info(ResponseCode.SUCCESS.getInfo())
+                .data(studentJobEntityList)
                 .build();
     }
 
