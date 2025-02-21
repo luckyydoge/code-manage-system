@@ -8,6 +8,7 @@ import edu.csu.codemanagesystem.domain.teacher.model.entity.StudentJobEntity;
 import edu.csu.codemanagesystem.domain.teacher.repository.ITeacherRepository;
 import edu.csu.codemanagesystem.infrastructure.dao.*;
 import edu.csu.codemanagesystem.infrastructure.po.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Slf4j
 public class TeacherRepository implements ITeacherRepository {
 
     @Autowired
@@ -52,10 +54,12 @@ public class TeacherRepository implements ITeacherRepository {
     @Override
     public List<StudentEntity> queryStudentByClassId(Long classId) {
         List<Long> studentIdList = studentClassDao.queryStudentIdByClassId(classId);
+        log.info("student id list :{} ", studentIdList);
         if (studentIdList.isEmpty()) {
             return List.of();
         }
         List<Student> studentList = studentDao.queryStudentByStudentIdList(studentIdList);
+        log.info("student list :{} ", studentList);
         List<StudentEntity> studentEntityList = new ArrayList<>();
         studentList.forEach(student -> {
             StudentEntity studentEntity = StudentEntity.builder()
@@ -98,7 +102,7 @@ public class TeacherRepository implements ITeacherRepository {
         studentEntityList.forEach(student -> {
             StudentJob studentJob = new StudentJob();
             studentJob.setJobId(jobId);
-            studentJob.setStudentId(studentJob.getStudentId());
+            studentJob.setStudentId(student.getStudentId());
             studentJob.setName(student.getName());
             studentJobList.add(studentJob);
         });
