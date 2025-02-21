@@ -8,9 +8,10 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://127.0.0.1:23306/code_manage_system
+
+    url: jdbc:mysql://mysql_db:3306/code_manage_system?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    initialize: true
+  #    initialize: true
   docker:
     compose:
       enabled: false
@@ -22,6 +23,8 @@ spring:
 python-service:
   url: http://localhost
   port: 8088
+
+db-port: 3306
 
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml

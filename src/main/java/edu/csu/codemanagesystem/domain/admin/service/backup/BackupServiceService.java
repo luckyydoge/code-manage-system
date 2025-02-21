@@ -8,6 +8,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -23,7 +26,8 @@ public class BackupServiceService implements IBackupService {
     @Value("${spring.datasource.password}")
     private String password;
 
-    private final String port = "13306";
+    @Value("${db-port}")
+    private String port;
 
     private String backupFilePath = "./docs/sql/backup.sql";
 
@@ -36,8 +40,18 @@ public class BackupServiceService implements IBackupService {
     public void backup() {
 
         try {
-            ProcessBuilder pb = new ProcessBuilder(cmd,
-                    "exec", "mysql_db", "mysqldump", "-u", username, "-P", port, "-p" + password, "code_manage_system");
+            Path filepath = Paths.get(backupFilePath);
+            if (!Files.exists(filepath)) {
+                Path parent = filepath.getParent();
+                if (!Files.exists(parent)) {
+                        Files.createDirectories(parent);
+                }
+                Files.createFile(filepath);
+            }
+//            Path parent = filepath.getParent();
+//            Files.createDirectories(parent);
+//            Files.createFile(filepath);
+            ProcessBuilder pb = new ProcessBuilder("mysqldump", "-u", username, "-P", port, "-p" + password, "code_manage_system");
             pb.redirectOutput(new File(backupFilePath));
             List<String> commands = pb.command();
             commands.forEach(command -> {

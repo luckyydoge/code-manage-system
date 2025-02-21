@@ -19,7 +19,6 @@ public class ImportStudentInfo extends AbstractImport<StudentEntity> {
 
     private long baseCount = 300000;
 
-    @Setter
     private Long classId;
     public void setClassId(Long classId) {
         this.classId = classId;
