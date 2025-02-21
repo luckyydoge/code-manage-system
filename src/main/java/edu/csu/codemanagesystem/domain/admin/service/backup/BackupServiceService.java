@@ -7,10 +7,13 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -29,7 +32,7 @@ public class BackupServiceService implements IBackupService {
     @Value("${db-port}")
     private String port;
 
-    private String backupFilePath = "./docs/sql/backup.sql";
+    private String backupFilePath = System.getProperty("user.dir") + "/docs/sql/backup.sql";
 
     private String cmd = "docker.exe";
 
@@ -51,7 +54,7 @@ public class BackupServiceService implements IBackupService {
 //            Path parent = filepath.getParent();
 //            Files.createDirectories(parent);
 //            Files.createFile(filepath);
-            ProcessBuilder pb = new ProcessBuilder("mysqldump", "-u", username, "-P", port, "-p" + password, "code_manage_system");
+            ProcessBuilder pb = new ProcessBuilder("mysqldump", "-h", "mysql_db", "-u", username, "-P", port, "-p" + password, "code_manage_system");
             pb.redirectOutput(new File(backupFilePath));
             List<String> commands = pb.command();
             commands.forEach(command -> {
@@ -61,12 +64,21 @@ public class BackupServiceService implements IBackupService {
             long startTime = System.currentTimeMillis();
             Process p = pb.start();
             int exitCode = p.waitFor();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            String line;
+            List<String> output = new ArrayList<>();
+            while ((line = reader.readLine()) != null) {
+                output.add(line);
+                System.out.println(line); // 实时打印输出
+            }
             long endTime = System.currentTimeMillis();
             log.info("use time : {}ms", (endTime - startTime));
             if (exitCode != 0) {
                 log.info("failed");
+                log.info("error code : {}", exitCode);
+            } else {
+                log.info("success");
             }
-            log.info("success");
         } catch (Exception e) {
             e.printStackTrace();
         }
