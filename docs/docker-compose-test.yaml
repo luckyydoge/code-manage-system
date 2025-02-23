@@ -1,0 +1,43 @@
+services:
+  mysql:
+    image: mysql:8.0.31
+    container_name: mysql_db
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: 123456
+    networks:
+      - my-network
+    ports:
+      - '23306:3306'
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  spring-boot:
+    image: spring-boot:latest
+    container_name: spring-boot
+    depends_on:
+      - mysql
+    environment:
+      - TZ=Asia/Shanghai
+      - SERVER_PORT=8080
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=123456
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_db:3306/code_manage_system?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+    networks:
+      - my-network
+    ports:
+      - '8880:8080'
+    restart: always
+#    volumes:
+#      - java_data:/app
+
+volumes:
+  mysql_data:
+  java_data:
+
+
+networks:
+  my-network:
+    driver: bridge
